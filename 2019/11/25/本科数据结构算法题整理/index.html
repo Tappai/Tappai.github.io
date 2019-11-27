@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="塔牌">
+
+
+
+<meta name="description" content="参考资料：厦门大学本科计算机历年卷">
+<meta name="keywords" content="C++,原创,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本科数据结构算法题整理">
+<meta property="og:url" content="http://tappat.top/2019/11/25/本科数据结构算法题整理/index.html">
+<meta property="og:site_name" content="TappaT&#39;s Blog">
+<meta property="og:description" content="参考资料：厦门大学本科计算机历年卷">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-25T15:19:36.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="本科数据结构算法题整理">
+<meta name="twitter:description" content="参考资料：厦门大学本科计算机历年卷">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="TappaT&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>本科数据结构算法题整理 | TappaT&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+</head></html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">塔牌</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/381102358@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/Tappai" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FPGA/">FPGA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创/">原创</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/密码学/">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小说/">小说</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵌入式/">嵌入式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数字信号处理/">数字信号处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络空间安全/">网络空间安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://litten.me/">Litten</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://xiaweizi.cn/">下位子</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">21岁、学生です</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">塔牌</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">塔牌</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/381102358@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/Tappai" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-本科数据结构算法题整理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/25/本科数据结构算法题整理/" class="article-date">
+      <time datetime="2019-11-25T15:03:06.000Z" itemprop="datePublished">2019-11-25</time>
+</a>
+
+
+
+      
+
+    </div>  
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      本科数据结构算法题整理
+    </h1>
+  
+
+        
+          <div style="margin-top:10px 0;margin-bottom:30px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">3.1k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">13分</span>
+      </span>
+    </span>
+</div>
+          
+      </header>
+
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/工学/">工学</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>参考资料：厦门大学本科计算机历年卷</p>
+<a id="more"></a>
+<h2 id="2012年本科期末b卷"><a class="markdownIt-Anchor" href="#2012年本科期末b卷"></a> 2012年本科期末B卷</h2>
+<h3 id="第7题-拆分链表"><a class="markdownIt-Anchor" href="#第7题-拆分链表"></a> 第7题 拆分链表</h3>
+<p><strong>题目：</strong></p>
+<blockquote>
+<p>有一个带头结点的单链表L={a1, b1, a2, b2, …, an, bn}，指针变量L指向头结点。请设计一个函数将其拆分成两个带头结点的单链表A和B，正序链表A={a1, a2, …, an}，逆序链表B={bn, bn-1, …, b2, b1}。要求链表A使用链表L的头结点。</p>
+<p>注：函数的头部为void split(LinkList &amp;L, LinkList &amp;A, LinkList &amp;B )。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">split</span><span class="params">(LinkList &amp;L, LinkList &amp;A, LinkList &amp;B )</span></span></span><br><span class="line"><span class="function"></span>&#123; LinkList * p=L-&gt;next, *q;</span><br><span class="line">   B = (LinkList ) <span class="built_in">malloc</span>( <span class="keyword">sizeof</span>(LinkList) ); <span class="comment">//创建B的头结点</span></span><br><span class="line">   B-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">   <span class="keyword">while</span>( p!=<span class="literal">NULL</span> ) &#123;</span><br><span class="line">      q = p-&gt;next; assert( q!=<span class="literal">NULL</span>);</span><br><span class="line">      p-&gt;next = q-&gt;next; p = p-&gt;next;</span><br><span class="line">      q-&gt;next = B-&gt;next;  B-&gt;next = q-&gt;next;</span><br><span class="line">   &#125;</span><br><span class="line">   A =L; L=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="第8题-求子序列和最大"><a class="markdownIt-Anchor" href="#第8题-求子序列和最大"></a> 第8题 求子序列和最大</h3>
+<p>题目：</p>
+<blockquote>
+<p>给出一系列整数，请设计算法求出总和最大的子系列，要求算法的时间复杂性在O(n)之内。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxsubsum</span><span class="params">(<span class="keyword">int</span>  a[n])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> maxsum=<span class="number">0</span>; thissum=<span class="number">0</span>; <span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (j=<span class="number">0</span>; j&lt;n;j++)</span><br><span class="line">	&#123;</span><br><span class="line">		thissum=thissum+a[j];</span><br><span class="line">		<span class="keyword">if</span> (thissum&gt;maxsum)	maxsum=thissum;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (thissum&lt;<span class="number">0</span>)	thissum=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> maxsum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2012年本科期末a卷"><a class="markdownIt-Anchor" href="#2012年本科期末a卷"></a> 2012年本科期末A卷</h2>
+<h3 id="第8题-删除有序单链表重复元素结点"><a class="markdownIt-Anchor" href="#第8题-删除有序单链表重复元素结点"></a> 第8题 删除有序单链表重复元素结点</h3>
+<p><strong>题目：</strong></p>
+<blockquote>
+<p>有一个单链表，其结点的元素值以递增顺序排列，给出数据结构，并编写一个算法删除该单链表中元素值相同的结点。</p>
+</blockquote>
+<p>**算法1：**从头到尾扫描单链表，若当前结点与后继结点的值不相同，则指针后移，若相同则删除该后继结点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*链表结构体，必背*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span>&#123;</span></span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;LNode, *LinkList;</span><br><span class="line"><span class="comment">//带头结点</span></span><br><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">Del_Dup</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	p=L-&gt;next;  <span class="comment">//p指向第一个元素</span></span><br><span class="line"><span class="keyword">if</span> (p ==<span class="literal">NULL</span>) <span class="keyword">return</span>; <span class="comment">// 处理空表</span></span><br><span class="line">	<span class="keyword">while</span> (p-&gt;next!=<span class="literal">NULL</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span>(p-&gt;data!=p -&gt;next-&gt;data)		<span class="comment">//若当前结点与后继结点的值不相同，则指针后移</span></span><br><span class="line">			p=p-&gt;next; </span><br><span class="line">		<span class="keyword">else</span>&#123;  <span class="comment">//若当前结点与后继结点的值相同，则删除该后继结点</span></span><br><span class="line">			q=p-&gt;next;</span><br><span class="line">			p-&gt;next=q-&gt;next;</span><br><span class="line">			<span class="built_in">free</span>(q);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>**算法2：**使用两个指针</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*结构体定义同上*/</span></span><br><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">Del_Dup</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (L-&gt;next ==<span class="literal">NULL</span>) <span class="keyword">return</span>; <span class="comment">// 处理空表</span></span><br><span class="line">	f=L-&gt;next; p=f-&gt;next; <span class="comment">//在扫描过程中，f保持为p的前驱</span></span><br><span class="line">	<span class="keyword">while</span> (p) &#123;</span><br><span class="line">		<span class="keyword">if</span>(f-&gt;data!=p -&gt;data)&#123;		<span class="comment">//若当前结点与后继结点的值不相同，则指针后移</span></span><br><span class="line">			f=p; </span><br><span class="line">p=p-&gt;next; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;  <span class="comment">//若当前结点与后继结点的值相同，则删除该后继结点</span></span><br><span class="line">			q=p;</span><br><span class="line">			f-&gt;next=p-&gt;next;</span><br><span class="line">			<span class="built_in">free</span>(q);</span><br><span class="line">			p=p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="第9题-求第k大元素"><a class="markdownIt-Anchor" href="#第9题-求第k大元素"></a> 第9题 求第k大元素</h3>
+<p><strong>题目：</strong></p>
+<blockquote>
+<p>在n个元素中，找出第k大的元素，给出数据结构，并设计算法实现上述要求，并给出时间复杂性分析，最好是在O(n)的时间复杂性之内。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="title">ITEM_select</span><span class="params">(ITEM [] a, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k)</span> <span class="comment">//l是下标最小值，r是下标最大值</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)  &#123; </span><br><span class="line">        <span class="keyword">int</span> i = partition(a, l ,r); <span class="comment">//partition后，比a[i]小的都在i左边，</span></span><br><span class="line"><span class="comment">//比a[i]大的都在 i右边。 </span></span><br><span class="line">        <span class="keyword">if</span>(i==k) <span class="keyword">return</span> a[k]; </span><br><span class="line">        <span class="keyword">if</span>(i&lt;k) r=i<span class="number">-1</span>; <span class="comment">//从l到i-1做selection </span></span><br><span class="line">        <span class="keyword">if</span>(i&gt;k) l=i+<span class="number">1</span>; <span class="comment">//从i+1到r做selection </span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分析：</p>
+<blockquote>
+<p>对于足够大的随机数组，每次partition会把数组分成大约相等的两半，那么每次问题size缩小一般，比较次数为n+n/2+n/ 4+…+1=2n。因此为O(n)。</p>
+</blockquote>
+<blockquote>
+<p>注意select和quicksort不同，因为quicksort每次都要比较N，而select的比较次数是指数减少的，因此是O(n)而不是O(nlogn)</p>
+</blockquote>
+<h2 id="2011年本科期末b卷"><a class="markdownIt-Anchor" href="#2011年本科期末b卷"></a> 2011年本科期末B卷</h2>
+<h3 id="第1题-部门数据结构表示"><a class="markdownIt-Anchor" href="#第1题-部门数据结构表示"></a> 第1题 部门数据结构表示</h3>
+<blockquote>
+<p>请根据下面的描述写出销售部门的数据结构（用C语言）：假设一个销售部门有n个职员（最多不超过N个，N为100），其中有一个是销售经理。每个职员都各自有一些客户，客户的个数不固定，不同职员的客户不重叠。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">CustNode</span> &#123;</span></span><br><span class="line">	Customer  cust;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">CustNode</span> * <span class="title">next</span>;</span></span><br><span class="line">&#125; CustNode, * CustLink;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>  &#123;</span></span><br><span class="line">	Saleman   sm;</span><br><span class="line">	CustLink  firstcust;  <span class="comment">//指向第一个销售员</span></span><br><span class="line">&#125; SalemanNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">SaleDept</span> &#123;</span></span><br><span class="line">	SalemanNode saleman[N];</span><br><span class="line">	<span class="keyword">int</span>  n; <span class="comment">//销售员的人数</span></span><br><span class="line">	<span class="keyword">int</span> manager; <span class="comment">//销售经理在数组saleman[N]中的序号</span></span><br><span class="line">&#125; SaleDept;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="第6题-两个有序表中共同元素的问题"><a class="markdownIt-Anchor" href="#第6题-两个有序表中共同元素的问题"></a> 第6题 两个有序表中共同元素的问题</h3>
+<blockquote>
+<p>在两个有序线性表中，寻找是否存在共同元素。如果存在共同元素，返回第一个共同元素在第一个有序表中的位置。请设计数据结构，并在其上设计算法。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">可以参考有序表的归并算法。</span><br><span class="line">数据结构可以使用一维数组，并且第<span class="number">0</span>个元素放空。</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">SearchCommonItem</span><span class="params">(<span class="keyword">int</span> a[n], <span class="keyword">int</span> b[m])</span><span class="comment">//第0位放空，返回值为0代表找不到</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">1</span>,j=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (i&lt;=n &amp;&amp; j&lt;=n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i]==b[j]) <span class="keyword">return</span> i;</span><br><span class="line">		<span class="keyword">else</span> (a[i]&lt;b[j]) i++;</span><br><span class="line">		<span class="keyword">else</span> j++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>分析：自己设计的时候容易忘记考虑没找到的情况结果该如何表示</p>
+</blockquote>
+<hr>
+<h3 id="第7题-遍历二叉查找树"><a class="markdownIt-Anchor" href="#第7题-遍历二叉查找树"></a> 第7题 遍历二叉查找树</h3>
+<blockquote>
+<p>编写一个遍历二叉查找树T的算法，要求遍历过程恰好按结点键值从大到小的次序进行。二叉树T数据结构采用二叉链表。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">travel</span><span class="params">(bitree bt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(bt)&#123;</span><br><span class="line">    travel(bt.rchild); </span><br><span class="line">    visit(bt.data); </span><br><span class="line">    travel(bt.lchild);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="第8题-链表重组奇前偶后"><a class="markdownIt-Anchor" href="#第8题-链表重组奇前偶后"></a> 第8题 链表重组，奇前偶后</h3>
+<blockquote>
+<p>一个正整数序列存放在带头结点的链表L中，每个结点存放一个正整数。请编写算法将该链表调整为所有奇数在链表的前部分，所有偶数在链表的后部分，并且调整后的奇数序列和偶数序列都与它们在原来序列中的次序一致（例如：原序列1 2 3 4 5 6，调整后 1 3 5 2 4 6）。要求：除算法外，还要给出数据结构、算法思想和代码注释。</p>
+</blockquote>
+<p><strong>数据结构：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//链表数据结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">   <span class="keyword">int</span> data;</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> * <span class="title">next</span>;</span></span><br><span class="line">&#125;*List;</span><br></pre></td></tr></table></figure>
+<p>**法一：**链表r保存倒序的奇数序列，然后逆序插入链表L的头部。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OddEven</span><span class="params">( List &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123; <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">p</span>, *<span class="title">q</span>, *<span class="title">r</span>;</span></span><br><span class="line">    p = L; r = <span class="literal">NULL</span>;  <span class="comment">//r是不带头结点的链表</span></span><br><span class="line">    <span class="keyword">while</span>( p-&gt;next!=<span class="literal">NULL</span> ) </span><br><span class="line">        <span class="keyword">if</span>( p-&gt;next-&gt;data%<span class="number">2</span>==<span class="number">0</span> ) p = p-&gt;next;<span class="comment">//如果是偶数，不管</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            q = p-&gt;next;         <span class="comment">//把结点从链表L中移走</span></span><br><span class="line">            p-&gt;next = q-&gt;next;   <span class="comment">//把结点从链表L中移走</span></span><br><span class="line">            q-&gt;next = r;         <span class="comment">//加入到链表r中</span></span><br><span class="line">            r = q;               <span class="comment">//加入到链表r中</span></span><br><span class="line">        &#125;</span><br><span class="line">	<span class="keyword">while</span>( r!=<span class="literal">NULL</span> ) &#123;           <span class="comment">//链表r逆序插入链表L的头部</span></span><br><span class="line">		q = r;r = r-&gt;next;</span><br><span class="line">		q-&gt;next = L-&gt;next;L-&gt;next = q;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>**法二：**顺序扫描链表直到表尾，每找到一个奇数时将其从原来位置删除，然后插入到奇数部分的表尾辅助指针ot（初始指向虚设的头结点）之后，并更新ot指针令其指向该新插入结点</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OddEven</span><span class="params">( List &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123; <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">p</span>, *<span class="title">q</span>, *<span class="title">ot</span>;</span></span><br><span class="line">    p = L; ot = L; </span><br><span class="line">    <span class="keyword">while</span>( p-&gt;next!=<span class="literal">NULL</span> ) </span><br><span class="line">        <span class="keyword">if</span>( p-&gt;next-&gt;data%<span class="number">2</span>==<span class="number">0</span> ) p = p-&gt;next;<span class="comment">//如果是偶数，不管</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (p!=ot) </span><br><span class="line">          &#123;  q = p-&gt;next;         <span class="comment">//把结点从链表L中移走</span></span><br><span class="line">             p-&gt;next = q-&gt;next;   <span class="comment">//把结点从链表L中移走</span></span><br><span class="line">             q-&gt;next = ot-&gt;nextr;   <span class="comment">//到链表ot之后</span></span><br><span class="line">			  ot-&gt;next=q;  			<span class="comment">//到链表ot之后</span></span><br><span class="line">	         ot = q;              </span><br><span class="line">          &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2011年本科期末a卷"><a class="markdownIt-Anchor" href="#2011年本科期末a卷"></a> 2011年本科期末A卷</h2>
+<h3 id="第8题-树的双亲表示下求公共祖先结点"><a class="markdownIt-Anchor" href="#第8题-树的双亲表示下求公共祖先结点"></a> 第8题 树的双亲表示下求公共祖先结点</h3>
+<blockquote>
+<p>假设一棵树的存储结构采用双亲表示法，双亲数组为int parent[MaxSize]，其中MaxSize为最大结点个数。树中各结点按先根遍历的次序存放，根结点存于parent[0]。试编写一个函数，计算下标p所指结点和下标q所指结点的最近公共祖先结点。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">CommonAncestry</span><span class="params">(<span class="keyword">int</span> parent[], <span class="keyword">int</span> MaxSize, <span class="keyword">int</span> p, <span class="keyword">int</span> q)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">for</span> (i=p; i!=<span class="number">-1</span>;i=parent[i])</span><br><span class="line">		<span class="keyword">for</span> (j=q; j!=<span class="number">-1</span>; j=parent[j])</span><br><span class="line">			<span class="keyword">if</span> (i==j) <span class="keyword">return</span> I;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="第9题-n个正整数在n容量数组中的排序"><a class="markdownIt-Anchor" href="#第9题-n个正整数在n容量数组中的排序"></a> 第9题 n个正整数在n容量数组中的排序</h3>
+<blockquote>
+<p>1，2，……，n这n个数，无序地保存在数组c[1…n]中。请编写一个时间复杂度为O(n)的排序算法，将数组c[1…n]按小到大排序。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">C_sort</span><span class="params">(<span class="keyword">int</span> c[], <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, x;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="keyword">while</span> (c[i]!=i)&#123;</span><br><span class="line">			x=c[i];</span><br><span class="line">			c[i]=c[x];</span><br><span class="line">			c[x]=x;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2010年本科期末b卷"><a class="markdownIt-Anchor" href="#2010年本科期末b卷"></a> 2010年本科期末B卷</h2>
+<h3 id="第7题-链表最小值移动到链头"><a class="markdownIt-Anchor" href="#第7题-链表最小值移动到链头"></a> 第7题 链表最小值移动到链头</h3>
+<blockquote>
+<p>在带头结点的非空线性链表中，试设计一算法，将链表中数据域值最小的那个结点移到链表的最前面，其余各结点的顺序保持不变。要求：不得额外申请新的链结点。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">   <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> * <span class="title">next</span>;</span></span><br><span class="line">&#125;Node,*LinkList;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MinFirst</span><span class="params">(LinkList L)</span></span>&#123;</span><br><span class="line">	Node *p,*q,*ptrmin;</span><br><span class="line">    <span class="keyword">if</span>(L-&gt;next == <span class="literal">NULL</span>) <span class="keyword">return</span>; <span class="comment">//空表</span></span><br><span class="line">    ptrmin = L; <span class="comment">//ptrmin指向当前最小结点的前一个结点</span></span><br><span class="line">	p = L-&gt;next;<span class="comment">//p指向当前结点的前一个结点</span></span><br><span class="line">	<span class="keyword">while</span>(p-&gt;next!=<span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>( p-&gt;next-&gt;data &lt; ptrmin-&gt;next-&gt;data ) ptrmin = p;</span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//q指向最小结点，并从链表中删除</span></span><br><span class="line">	q = ptrmin-&gt;next; ptrmin-&gt;next = q-&gt;next;	</span><br><span class="line">	q-&gt;next = L-&gt;next; L-&gt;next = q; <span class="comment">//q指向的最小结点插入到链表头</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="第8题-用两个队列模拟一个栈"><a class="markdownIt-Anchor" href="#第8题-用两个队列模拟一个栈"></a> 第8题 用两个队列模拟一个栈</h3>
+<blockquote>
+<p>请利用两个队列Q1和Q2来模拟一个栈。已知队列的三个运算定义如下：bool EnQueue(Queue &amp;Q,int e):插入一个元素e入队列； bool DeQueue(Queue &amp;Q,int &amp;e):删除一个元素e出队列；bool QueueEmpty(Queue Q)：判队列为空。假设数据结构Queue已定义，栈Stack的数据结构定义如下。请利用队列的运算来实现该栈的三个运算：Push(Stack ST,int x):元素x入ST栈；Pop(Stack ST, int x)：ST栈顶元素出栈，赋给变量x；StackEmpty(Stack ST)：判ST栈是否为空。</p>
+<p>typedef struct {</p>
+<p>Queue Q1;</p>
+<p>Queue Q2;</p>
+<p>} Stack;</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*队列Q1或Q2中的某一个保存所有的栈元素。*/</span></span><br><span class="line"><span class="comment">//判断栈是否为空</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">StackEmpty</span><span class="params">(Stack S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> QueueEmpty(S.Q1) &amp;&amp; QueueEmpty(S.Q2);<span class="comment">//两队列都为空，即栈为空</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//x入栈</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Push</span><span class="params">(Stack &amp;S, <span class="keyword">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>( QueueEmpty(S.Q2)==<span class="literal">false</span> )</span><br><span class="line">		<span class="keyword">return</span> EnQueue(S.Q2, e);</span><br><span class="line">	<span class="keyword">return</span> EnQueue(S.Q1, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//出栈并赋值给x</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Pop</span><span class="params">( Stack &amp;S, <span class="keyword">int</span> &amp;e)</span> </span>&#123;</span><br><span class="line"> 	Queue *from,*to;</span><br><span class="line"> 	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">if</span>( QueueEmpty(S.Q1)==<span class="literal">true</span> &amp;&amp; QueueEmpty(S.Q2)==<span class="literal">true</span> ) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span>( QueueEmpty(S.Q1)==<span class="literal">false</span> ) &#123;</span><br><span class="line">		from = &amp;S.Q1; to = &amp;S.Q2;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		from = &amp;S.Q2; to = &amp;S.Q1;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*假设Q1非空，把Q1的元素依次出队，再赋给Q2，直到Q1为空，把最后出队的x赋给e*/</span></span><br><span class="line">	DeQueue(*from,x);</span><br><span class="line">	<span class="keyword">while</span>( QueueEmpty(*from)==<span class="literal">false</span> ) &#123;</span><br><span class="line">		EnQueue(*to,x);</span><br><span class="line">		DeQueue(*from,x);</span><br><span class="line">    &#125;</span><br><span class="line">	e = x;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2010年本科期末a卷"><a class="markdownIt-Anchor" href="#2010年本科期末a卷"></a> 2010年本科期末A卷</h2>
+<h3 id="第7题-有序单链表插入元素"><a class="markdownIt-Anchor" href="#第7题-有序单链表插入元素"></a> 第7题 有序单链表插入元素</h3>
+<blockquote>
+<p>设L是一个带头结点的非递减有序单链表的表头指针，试设计一个算法，将元素e插入到链表L中的合适地方，使得该链表仍是非递减有序。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">ElemType e;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> * <span class="title">next</span>;</span></span><br><span class="line">&#125; Node, *LinkList;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">( LinkList &amp;L, ElemType e)</span></span>&#123;</span><br><span class="line"> 	Node * p, *q, *s;</span><br><span class="line">	p = L-&gt;next; q = L;</span><br><span class="line">	<span class="keyword">while</span> ( p!=<span class="literal">NULL</span> &amp;&amp; p-&gt;data &lt;= e ) &#123;</span><br><span class="line">    q = p; p = p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	s = (Node *) <span class="built_in">malloc</span>( <span class="keyword">sizeof</span>(Node) );</span><br><span class="line">	s-&gt;data = e;</span><br><span class="line">	s-&gt;next = p;</span><br><span class="line">	q-&gt;next = s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我的答案(算法部分)：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">( LinkList &amp;L, ElemType e)</span></span>&#123;</span><br><span class="line"> 	Node * p, *q;</span><br><span class="line">    p=L;</span><br><span class="line">	<span class="keyword">if</span>(L-&gt;next==<span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">while</span> ( p!=<span class="literal">NULL</span>) &#123;</span><br><span class="line">   		<span class="keyword">if</span>(p-&gt;data &lt; e &amp;&amp; p-&gt;next-&gt;data &gt;= e)&#123;</span><br><span class="line">        	q=(Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">        	q-&gt;data=e;</span><br><span class="line">        	q-&gt;next=p-&gt;next;</span><br><span class="line">        	p=&gt;next=q;</span><br><span class="line">    	&#125;</span><br><span class="line">    	<span class="keyword">else</span> p=p-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2009年本科期末b卷"><a class="markdownIt-Anchor" href="#2009年本科期末b卷"></a> 2009年本科期末B卷</h2>
+<h3 id="第7题-孩子兄弟链表求树深度"><a class="markdownIt-Anchor" href="#第7题-孩子兄弟链表求树深度"></a> 第7题 孩子兄弟链表求树深度</h3>
+<blockquote>
+<p>用孩子兄弟链表作为树的存储结构，设计算法求出树的深度。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">CSNode</span>&#123;</span></span><br><span class="line">ElemType data;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CSNode</span> *<span class="title">firstchild</span>, * <span class="title">nextsibling</span>;</span></span><br><span class="line">&#125; CSNode, *CSTree;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">depth</span><span class="params">(CSNode * t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	CSNode *p; <span class="keyword">int</span> m, d;</span><br><span class="line">	<span class="keyword">if</span> (t==<span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	p=tfirstchild; m=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (p) &#123;</span><br><span class="line">		d=depth(p);</span><br><span class="line">		<span class="keyword">if</span> (d&gt;m)	m=d;</span><br><span class="line"> 		p=pnextsibling;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> m+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>算法思路：一棵树的深度可以递归定义为：若树为空，则深度为0，否则树的深度为根结点的所有子树深度的最大值加1。</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/11/25/本科数据结构算法题整理/">本科数据结构算法题整理</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">塔牌</a></p>
+        <p><span>发布时间:</span>2019-11-25, 23:03:06</p>
+        <p><span>最后更新:</span>2019-11-25, 23:19:36</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/25/本科数据结构算法题整理/" title="本科数据结构算法题整理">http://tappat.top/2019/11/25/本科数据结构算法题整理/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://tappat.top/2019/11/25/本科数据结构算法题整理/　　作者: 塔牌" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/11/26/test/">
+                    test
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/11/09/Speech/">
+                    Churchill broadcast speech
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2012年本科期末b卷"><span class="toc-text"> 2012年本科期末B卷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第7题-拆分链表"><span class="toc-text"> 第7题 拆分链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第8题-求子序列和最大"><span class="toc-text"> 第8题 求子序列和最大</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2012年本科期末a卷"><span class="toc-text"> 2012年本科期末A卷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第8题-删除有序单链表重复元素结点"><span class="toc-text"> 第8题 删除有序单链表重复元素结点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第9题-求第k大元素"><span class="toc-text"> 第9题 求第k大元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2011年本科期末b卷"><span class="toc-text"> 2011年本科期末B卷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第1题-部门数据结构表示"><span class="toc-text"> 第1题 部门数据结构表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第6题-两个有序表中共同元素的问题"><span class="toc-text"> 第6题 两个有序表中共同元素的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第7题-遍历二叉查找树"><span class="toc-text"> 第7题 遍历二叉查找树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第8题-链表重组奇前偶后"><span class="toc-text"> 第8题 链表重组，奇前偶后</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2011年本科期末a卷"><span class="toc-text"> 2011年本科期末A卷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第8题-树的双亲表示下求公共祖先结点"><span class="toc-text"> 第8题 树的双亲表示下求公共祖先结点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第9题-n个正整数在n容量数组中的排序"><span class="toc-text"> 第9题 n个正整数在n容量数组中的排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2010年本科期末b卷"><span class="toc-text"> 2010年本科期末B卷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第7题-链表最小值移动到链头"><span class="toc-text"> 第7题 链表最小值移动到链头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第8题-用两个队列模拟一个栈"><span class="toc-text"> 第8题 用两个队列模拟一个栈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2010年本科期末a卷"><span class="toc-text"> 2010年本科期末A卷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第7题-有序单链表插入元素"><span class="toc-text"> 第7题 有序单链表插入元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2009年本科期末b卷"><span class="toc-text"> 2009年本科期末B卷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第7题-孩子兄弟链表求树深度"><span class="toc-text"> 第7题 孩子兄弟链表求树深度</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"本科数据结构算法题整理　| TappaT's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <section class="livere" id="comments">
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80Njk4My8yMzQ4Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/11/26/test/" title="上一篇: test">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/11/09/Speech/" title="下一篇: Churchill broadcast speech">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/25/本科数据结构算法题整理/">本科数据结构算法题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Speech/">Churchill broadcast speech</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Address/">Gettysburg Address</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/网络空间安全导论笔记/">网络空间安全导论笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/MySQL基础入门/">MySQL基础入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/23/ucosⅡ移植mini2440及其应用/">ucosⅡ移植mini2440及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/">C++中结构体与类的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/一些有价值的网页/">一些有价值的网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/09/FPGA产生m序列及其应用/">FPGA产生m序列及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/07/辨析arcsinsinx与arccoscosx/">辨析arcsin(sinx)与arccos(cosx)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/06/博苏克-乌拉姆定理解项链珠宝分配问题/">博苏克-乌拉姆定理解项链珠宝分配问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/05/构造函数典例及其保号性思路/">构造函数典例及其保号性思路</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/调和级数判敛/">调和级数判敛</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/C-动态内存简介/">C++动态内存简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/P站画师collection/">P站画师collection</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/FPGA二进制序列检测/">FPGA二进制序列检测</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/01/欢迎页面/">欢迎页面</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/网站更新记录/">网站更新记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/28/关于书写用笔的使用记录/">关于书写用笔的使用记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/27/DFT圆周卷积典例/">DFT圆周卷积典例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/PAT甲级1008部分正确情况分析/">PAT甲级1008部分正确情况分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/FPGA产生三路120度相位差正弦波/">FPGA产生三路120度相位差正弦波</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/FPGA实现CORDIC算法/">FPGA实现CORDIC算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/FPGA测量两路信号的相位差/">FPGA测量两路同频信号的相位差</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/人间永恒/">人间永恒</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2019 塔牌
+            </div>
+ 
+ 
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+ 
+ 
+        
+ 
+ 
+            <div class="visit">
+                
+                    <span style='display:inline'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i>本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                        </span>
+                    </span>
+                
+ 
+ 
+                
+                    <span>| </span>
+                
+ 
+ 
+                
+                    <span style='display:inline'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i>本页面被访问<span id="busuanzi_value_page_pv"></span>次
+                        </span>
+                    </span>
+                
+ 
+                
+                    <span>| </span>
+                
+ 
+ 
+                
+                    <span style='display:inline'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-user" aria-hidden="true"></i>本站访客数<span id="busuanzi_value_site_uv"></span>人
+                        </span>
+                    </span>
+                
+ 
+                
+            </div>
+        
+    </div>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("09/14/2019 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 8;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>

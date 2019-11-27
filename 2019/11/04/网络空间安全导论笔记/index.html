@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="塔牌">
+
+
+
+<meta name="description" content="参考课程：福州大学 网络空间安全概论">
+<meta name="keywords" content="原创,网络空间安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络空间安全导论笔记">
+<meta property="og:url" content="http://tappat.top/2019/11/04/网络空间安全导论笔记/index.html">
+<meta property="og:site_name" content="TappaT&#39;s Blog">
+<meta property="og:description" content="参考课程：福州大学 网络空间安全概论">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/anquan.png">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/sercurity_sql.png">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/sercurity_virus.png">
+<meta property="og:updated_time" content="2019-11-10T10:14:45.974Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络空间安全导论笔记">
+<meta name="twitter:description" content="参考课程：福州大学 网络空间安全概论">
+<meta name="twitter:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/anquan.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="TappaT&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>网络空间安全导论笔记 | TappaT&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+</head></html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">塔牌</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/381102358@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/Tappai" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FPGA/">FPGA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创/">原创</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/密码学/">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小说/">小说</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵌入式/">嵌入式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数字信号处理/">数字信号处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络空间安全/">网络空间安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://litten.me/">Litten</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://xiaweizi.cn/">下位子</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">21岁、学生です</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">塔牌</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">塔牌</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/381102358@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/Tappai" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-网络空间安全导论笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/04/网络空间安全导论笔记/" class="article-date">
+      <time datetime="2019-11-04T15:23:31.000Z" itemprop="datePublished">2019-11-04</time>
+</a>
+
+
+
+      
+
+    </div>  
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      网络空间安全导论笔记
+    </h1>
+  
+
+        
+          <div style="margin-top:10px 0;margin-bottom:30px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.5k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">8分</span>
+      </span>
+    </span>
+</div>
+          
+      </header>
+
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/工学/">工学</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络空间安全/">网络空间安全</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>参考课程：福州大学 网络空间安全概论</p>
+<a id="more"></a>
+<h2 id="1-网络安全威胁"><a class="markdownIt-Anchor" href="#1-网络安全威胁"></a> 1 网络安全威胁</h2>
+<h3 id="11-设备层安全"><a class="markdownIt-Anchor" href="#11-设备层安全"></a> 1.1 设备层安全</h3>
+<p>物理、环境、设备安全</p>
+<blockquote>
+<p>皮下芯片接触智能设备解锁密码，硬件木马</p>
+</blockquote>
+<h3 id="12-系统层安全"><a class="markdownIt-Anchor" href="#12-系统层安全"></a> 1.2 系统层安全</h3>
+<p>网络、计算机、软件、操作系统、数据库安全</p>
+<blockquote>
+<p>SQL注入，软件木马</p>
+</blockquote>
+<h3 id="13-数据层安全"><a class="markdownIt-Anchor" href="#13-数据层安全"></a> 1.3 数据层安全</h3>
+<p>数据、身份、隐私安全</p>
+<blockquote>
+<p>虚假钓鱼WIFI，蓝牙设备攻击</p>
+</blockquote>
+<h3 id="14-应用层安全"><a class="markdownIt-Anchor" href="#14-应用层安全"></a> 1.4 应用层安全</h3>
+<p>内容、支付、控制、物联网安全</p>
+<blockquote>
+<p>虚假钓鱼网站</p>
+</blockquote>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/anquan.png" alt></p>
+<h2 id="2-芯片安全"><a class="markdownIt-Anchor" href="#2-芯片安全"></a> 2 芯片安全</h2>
+<p><strong>集成电路主要威胁：</strong></p>
+<ul>
+<li>
+<p>赝品IC</p>
+<blockquote>
+<p>外观上与正规IC相同，但不符合标准的IC</p>
+</blockquote>
+</li>
+<li>
+<p>逆向工程</p>
+<blockquote>
+<p>逆向IC制造过程中，通过物理电路获取敏感信息</p>
+</blockquote>
+</li>
+<li>
+<p>硬件木马</p>
+<blockquote>
+<p>原始电路中植入的具有恶意功能的冗余电路。</p>
+</blockquote>
+</li>
+</ul>
+<p>其中安全威胁最大的是硬件木马。</p>
+<h2 id="3-可信计算"><a class="markdownIt-Anchor" href="#3-可信计算"></a> 3 可信计算</h2>
+<blockquote>
+<p>“可信“定义基本概括为：</p>
+<ul>
+<li>强调实体行为的预期性</li>
+<li>强调系统的安全与可靠</li>
+</ul>
+</blockquote>
+<p><strong>可信计算的应用：</strong></p>
+<ol>
+<li>数字版权管理</li>
+<li>身份盗用保护</li>
+<li>游戏防作弊</li>
+<li>保护系统</li>
+<li>保护数据</li>
+<li>验证计算结果</li>
+</ol>
+<h2 id="4-防火墙"><a class="markdownIt-Anchor" href="#4-防火墙"></a> 4 防火墙</h2>
+<p><strong>防火墙技术</strong>：</p>
+<p>外部网络|防火墙|内部本地网络</p>
+<p><strong>防火墙作用：</strong></p>
+<ol>
+<li>安全域划分与安全域策略部署</li>
+<li>根据访问控制列表实现访问控制</li>
+<li>防止内部信息外泄</li>
+<li>审计功能</li>
+<li>部署网络地址转换</li>
+</ol>
+<p><strong>防火墙的局限性：</strong></p>
+<ol>
+<li>无法防范来自网络内部的恶意攻击</li>
+<li>无法防范不经过防火墙的攻击</li>
+<li>防火墙会带来传输延迟、通信瓶颈和单点失效问题</li>
+<li>防火墙对服务器合法开放的端口的攻击无法阻止</li>
+<li>防火墙本身也会存在漏洞而遭受攻击</li>
+<li>防火墙不处理病毒和木马攻击的行为</li>
+<li>限制了存在安全缺陷的网络服务，影响了用户使用服务的便利性</li>
+</ol>
+<p><strong>防火墙关键技术：</strong></p>
+<ul>
+<li>数据包过滤技术</li>
+</ul>
+<blockquote>
+<p>根据通行规则，对包放行或者丢弃。</p>
+</blockquote>
+<ul>
+<li>应用层代理技术</li>
+</ul>
+<blockquote>
+<p>内部网络向外部网络申请服务时起到中间转接作用。</p>
+</blockquote>
+<ul>
+<li>状态检测技术</li>
+<li>网络地址转换技术</li>
+<li>个人防火墙</li>
+</ul>
+<h2 id="5-入侵检测技术ids"><a class="markdownIt-Anchor" href="#5-入侵检测技术ids"></a> 5 入侵检测技术IDS</h2>
+<p><strong>主要功能：</strong></p>
+<ul>
+<li>
+<p>监控、分析用户和系统活动</p>
+</li>
+<li>
+<p>发现入侵企图和异常现象</p>
+</li>
+<li>
+<p>审计系统的配置和漏洞</p>
+</li>
+<li>
+<p>评估关键系统和数据文件的完整性</p>
+</li>
+<li>
+<p>对异常活动的统计与分析</p>
+</li>
+<li>
+<p>识别攻击的活动模型</p>
+</li>
+<li>
+<p>实时报警与主动响应</p>
+</li>
+</ul>
+<h2 id="6-虚拟专用网vpn"><a class="markdownIt-Anchor" href="#6-虚拟专用网vpn"></a> 6 虚拟专用网VPN</h2>
+<p>利用公用的互联网作为本机构各专用网之间的通信载体，称为虚拟专用网</p>
+<h2 id="7-网络信息收集技术"><a class="markdownIt-Anchor" href="#7-网络信息收集技术"></a> 7 网络信息收集技术</h2>
+<h3 id="71-网络踩点"><a class="markdownIt-Anchor" href="#71-网络踩点"></a> 7.1 网络踩点</h3>
+<ul>
+<li>了解目标隐私信息、网络环境、信息安全状况</li>
+<li>根据踩点结果找出目标可能存在的薄弱环节</li>
+</ul>
+<p><strong>网络踩点常用手段：</strong></p>
+<ol>
+<li>Google Hacking</li>
+</ol>
+<blockquote>
+<p>即通过网络搜索引擎查找特定安全漏洞或私密信息的方法</p>
+<blockquote>
+<p>常用搜索引擎： <a href="http://www.ZoomEye.org" target="_blank" rel="noopener">www.ZoomEye.org</a> 、<a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> 、<a href="http://www.altavista.com" target="_blank" rel="noopener">www.altavista.com</a> 、<a href="http://www.dogpile.com" target="_blank" rel="noopener">www.dogpile.com</a></p>
+<p>Google Hacking客户端软件: Athena, Wikto, SiteDigger</p>
+</blockquote>
+</blockquote>
+<p>防范措施：不要在网络上留下敏感信息，关注中国国家漏洞库CNNVD等安全漏洞信息库发布的技术信息，及时更新补丁。</p>
+<hr>
+<ol start="2">
+<li>WhoIs查询</li>
+</ol>
+<ul>
+<li>DNS注册信息查询：查询特定域名的3R详细注册信息</li>
+</ul>
+<blockquote>
+<p>例如ICANN(因特网技术协调机构)网站，或者其它提供WHOIS查询服务的机构</p>
+</blockquote>
+<ul>
+<li>IP查询：查询特定IP地址的详细注册信息</li>
+</ul>
+<p>防范措施：及时更新管理性事务联系人的信息，或使用虚构的人名来作为管理性事务联系人</p>
+<hr>
+<ol start="3">
+<li>DNS查询</li>
+</ol>
+<blockquote>
+<p>DNS: 一个提供域名到IP地址的映射或者将IP地址映射成域名的分布式数据库系统</p>
+<ul>
+<li>权威DNS——主DNS</li>
+<li>Cashe-Only DNS——辅助DNS</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>DNS区域传送：辅助DNS服务器使用来自主服务器的数据刷新自己的ZONE数据库；为运行中的DNS服务提供一定冗余度</p>
+</blockquote>
+<p>网络管理员允许不受信任的因特网用户执行DNS区域传送是严重的错误配置。</p>
+<p>解决方案：对外的DNS服务器配置为禁止DNS区域传送，且服务器不能包含内部网络相关主机的敏感信息。</p>
+<p><strong>网络扫描：</strong></p>
+<ul>
+<li>主机扫描：找出网段内活跃主机</li>
+</ul>
+<blockquote>
+<p>原理：向目标系统发出特定数据包，分析响应结果（或者没有任何结果）。</p>
+</blockquote>
+<blockquote>
+<p>常见扫描技术：ICMP Ping扫描</p>
+<blockquote>
+<p>端口扫描：</p>
+<ul>
+<li>TCP ACK Ping扫描</li>
+<li>TCP SYN Ping扫描</li>
+<li>UDP Ping扫描</li>
+</ul>
+</blockquote>
+</blockquote>
+<ul>
+<li>端口扫描：找出主机上开放的网络服务</li>
+</ul>
+<blockquote>
+<p>常见端口扫描技术：TCP连接、TCP SYN、TCP FIN、 TCP圣诞树、 TCP 空、TCP ACK、TCP窗口、TCP RPC、UDP扫描</p>
+</blockquote>
+<blockquote>
+<p>端口扫描检测：网络入侵检测系统如Snort</p>
+</blockquote>
+<blockquote>
+<p>端口扫描预防：开启防火墙，禁用所有不必要服务</p>
+</blockquote>
+<ul>
+<li>操作系统/网络服务辨识：识别目标的操作系统类型与开放网络服务类型，以选择不同渗透攻击代码及配置</li>
+</ul>
+<blockquote>
+<p>常用：nmap</p>
+</blockquote>
+<ul>
+<li>漏洞扫描：找出安全漏洞，作为破解通道</li>
+</ul>
+<blockquote>
+<p>常用：Nessus</p>
+</blockquote>
+<blockquote>
+<p>科普：世界著名漏洞挖掘大赛Pwn2Own，在该比赛中获奖意味着该参赛者安全研究水平已达到世界领先地步。</p>
+</blockquote>
+<h3 id="72-网络查点"><a class="markdownIt-Anchor" href="#72-网络查点"></a> 7.2 网络查点</h3>
+<p>查点：对已选择好的攻击目标，发起主动连接和查询，针对性地收集发起实际攻击所需的具体信息内容。</p>
+<h2 id="8-windows系统渗透基础"><a class="markdownIt-Anchor" href="#8-windows系统渗透基础"></a> 8 Windows系统渗透基础</h2>
+<h3 id="81-控制注入攻击"><a class="markdownIt-Anchor" href="#81-控制注入攻击"></a> 8.1 控制注入攻击</h3>
+<blockquote>
+<p>现代计算机系统仍按照冯诺依曼体系结构，内存中的计算机程序数据与指令没有严格区分，这就使得外部数据有可能成为代码而被执行</p>
+</blockquote>
+<p><strong>典型的劫持攻击技术：</strong></p>
+<ul>
+<li>缓冲区溢出</li>
+</ul>
+<blockquote>
+<p>向特定缓冲区填充数据，由于缺乏严格的边界检查，导致数据外溢，覆盖了相邻内存空间的合法数据。</p>
+</blockquote>
+<ul>
+<li>格式化字符串漏洞</li>
+<li>整数溢出</li>
+<li>指针释放后再次被使用</li>
+</ul>
+<h3 id="82-远程渗透windows系统的途径"><a class="markdownIt-Anchor" href="#82-远程渗透windows系统的途径"></a> 8.2 远程渗透Windows系统的途径</h3>
+<ul>
+<li>认证欺骗</li>
+<li>客户端软件漏洞利用</li>
+<li>设备驱动漏洞利用</li>
+</ul>
+<h2 id="9-internet协议安全问题"><a class="markdownIt-Anchor" href="#9-internet协议安全问题"></a> 9 Internet协议安全问题</h2>
+<h3 id="91网络攻击的基本模式"><a class="markdownIt-Anchor" href="#91网络攻击的基本模式"></a> 9.1网络攻击的基本模式</h3>
+<ul>
+<li>
+<p>截获</p>
+<blockquote>
+<p>嗅探(sniffing)</p>
+<p>监听(eavesdropping)</p>
+</blockquote>
+</li>
+<li>
+<p>篡改</p>
+<blockquote>
+<p>数据包篡改(tampering)</p>
+</blockquote>
+</li>
+<li>
+<p>中断</p>
+<blockquote>
+<p>拒绝服务（DoSing）</p>
+</blockquote>
+</li>
+<li>
+<p>伪造</p>
+<blockquote>
+<p>欺骗(Spoofing)</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="92-拒绝服务dos式攻击"><a class="markdownIt-Anchor" href="#92-拒绝服务dos式攻击"></a> 9.2 拒绝服务(DoS)式攻击</h3>
+<p>用超出目标处理能力的海量数据包消耗可用系统资源、带宽资源，或造成程序缓冲区溢出错误。</p>
+<p>主要分为：</p>
+<ul>
+<li>弱点攻击</li>
+<li>洪泛攻击</li>
+</ul>
+<h2 id="10-基本web安全问题"><a class="markdownIt-Anchor" href="#10-基本web安全问题"></a> 10 基本Web安全问题</h2>
+<h3 id="101-跨站脚本攻击cross-site-scripting简称xss"><a class="markdownIt-Anchor" href="#101-跨站脚本攻击cross-site-scripting简称xss"></a> 10.1 跨站脚本攻击(Cross-Site Scripting)(简称XSS)</h3>
+<p>指攻击者利用网页开发时留下的漏洞，注入恶意指令代码到网页，使用户加载网页时运行攻击者恶意制造的代码。</p>
+<blockquote>
+<p>常见脚本: JavaScript、VBScript、ActiveX、Flash、HTML</p>
+</blockquote>
+<p>XSS分为三种类型：反射性XSS、存储型CSS、DOM-XSS</p>
+<h3 id="102-sql注入"><a class="markdownIt-Anchor" href="#102-sql注入"></a> 10.2 SQL注入</h3>
+<p>指利用Web应用程序输入验证不完善的漏洞，将一段SQL命令注入到后台数据库引擎执行。</p>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/sercurity_sql.png" alt></p>
+<p><strong>防范SQL注入攻击需要注意：</strong></p>
+<ol>
+<li>使用类型安全的参数编码机制</li>
+<li>对来自程序外部的用户输入，必须进行完备检查</li>
+<li>将动态SQL语句替换为存储过程，预编译SQL或ADO命令对象</li>
+<li>加强SQL数据库服务器的配置与连接，避免将敏感数据明文存放于数据库中</li>
+</ol>
+<h3 id="103-跨站请求伪造cross-site-request-forgey简称csrf"><a class="markdownIt-Anchor" href="#103-跨站请求伪造cross-site-request-forgey简称csrf"></a> 10.3 跨站请求伪造(Cross-Site Request Forgey)(简称CSRF)</h3>
+<p>利用web用户身份验证的漏洞：基于Cookies的身份验证只能保证请求发自用户的浏览器，却不能保证请求是用户自愿发出的。</p>
+<blockquote>
+<p>Cookie又称为浏览器缓存，是Web服务器保存在用户浏览器上进过加密的小文本文件，用于记录用户信息、辨别用户身份、进行会话跟踪等，持久Cookie可以保持登录信息到用户下次与服务器的会话。</p>
+<blockquote>
+<p>例如打开淘宝页面登录后，再打开其他淘宝页面不会要求重新登录，登录状态会保持一段时间</p>
+<p>此时若同时也打开了某恶意网站，就可能被获取cookie身份验证码，导致账号威胁</p>
+</blockquote>
+</blockquote>
+<h2 id="11-社会工程学攻击"><a class="markdownIt-Anchor" href="#11-社会工程学攻击"></a> 11 社会工程学攻击</h2>
+<p>利用<strong>心理学</strong>获取机密信息的一门艺术与学问</p>
+<p><strong>常用攻击形式：</strong></p>
+<p>信息收集，心理诱导，身份伪造，施加影响。</p>
+<h2 id="12-恶意程序概述"><a class="markdownIt-Anchor" href="#12-恶意程序概述"></a> 12 恶意程序概述</h2>
+<p><strong>恶意程序分类：</strong></p>
+<p>​	计算机病毒，蠕虫，特洛伊木马，隐遁工具，间谍软件，恶意广告，流氓软件，逻辑炸弹，后门程序，僵尸网络，网络钓鱼，恶意脚本，勒索软件，智能终端恶意程序</p>
+<p><strong>恶意程序的特征：</strong></p>
+<p>​	强制安装，难以卸载，浏览器劫持</p>
+<h3 id="121-病毒与蠕虫"><a class="markdownIt-Anchor" href="#121-病毒与蠕虫"></a> 12.1 病毒与蠕虫</h3>
+<p><strong>计算机病毒原理：</strong></p>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/sercurity_virus.png" alt></p>
+<p><strong>蠕虫工作原理：</strong></p>
+<p>漏洞扫描→攻击→传染→现场处理</p>
+<h3 id="122-木马与网页木马"><a class="markdownIt-Anchor" href="#122-木马与网页木马"></a> 12.2 木马与网页木马</h3>
+<p><strong>木马程序攻击流程：</strong></p>
+<ol>
+<li>
+<p>利用工具将木马服务器程序绑定到软件上，诱使用户安装</p>
+</li>
+<li>
+<p>木马客户端利用信息反馈或IP扫描，获知网络中已带有木马的主机，建立木马通道</p>
+</li>
+<li>
+<p>利用客户端程序发送命令，操控用户计算机</p>
+</li>
+</ol>
+<p><strong>网页木马原理：</strong></p>
+<p>实质：一个包含木马种植器的HTML网页</p>
+<p>该网页包含：攻击者制作的脚本</p>
+<blockquote>
+<p>用户一旦访问该网页，网页中的脚本会利用漏洞自动下载木马程序并安装运行，整个过程在后台进行，无需用户操作。</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/11/04/网络空间安全导论笔记/">网络空间安全导论笔记</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">塔牌</a></p>
+        <p><span>发布时间:</span>2019-11-04, 23:23:31</p>
+        <p><span>最后更新:</span>2019-11-10, 18:14:45</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/04/网络空间安全导论笔记/" title="网络空间安全导论笔记">http://tappat.top/2019/11/04/网络空间安全导论笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://tappat.top/2019/11/04/网络空间安全导论笔记/　　作者: 塔牌" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/11/09/Address/">
+                    Gettysburg Address
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/10/24/MySQL基础入门/">
+                    MySQL基础入门
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-网络安全威胁"><span class="toc-text"> 1 网络安全威胁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-设备层安全"><span class="toc-text"> 1.1 设备层安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-系统层安全"><span class="toc-text"> 1.2 系统层安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-数据层安全"><span class="toc-text"> 1.3 数据层安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-应用层安全"><span class="toc-text"> 1.4 应用层安全</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-芯片安全"><span class="toc-text"> 2 芯片安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-可信计算"><span class="toc-text"> 3 可信计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-防火墙"><span class="toc-text"> 4 防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-入侵检测技术ids"><span class="toc-text"> 5 入侵检测技术IDS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-虚拟专用网vpn"><span class="toc-text"> 6 虚拟专用网VPN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-网络信息收集技术"><span class="toc-text"> 7 网络信息收集技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#71-网络踩点"><span class="toc-text"> 7.1 网络踩点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#72-网络查点"><span class="toc-text"> 7.2 网络查点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-windows系统渗透基础"><span class="toc-text"> 8 Windows系统渗透基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#81-控制注入攻击"><span class="toc-text"> 8.1 控制注入攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#82-远程渗透windows系统的途径"><span class="toc-text"> 8.2 远程渗透Windows系统的途径</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-internet协议安全问题"><span class="toc-text"> 9 Internet协议安全问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#91网络攻击的基本模式"><span class="toc-text"> 9.1网络攻击的基本模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#92-拒绝服务dos式攻击"><span class="toc-text"> 9.2 拒绝服务(DoS)式攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-基本web安全问题"><span class="toc-text"> 10 基本Web安全问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#101-跨站脚本攻击cross-site-scripting简称xss"><span class="toc-text"> 10.1 跨站脚本攻击(Cross-Site Scripting)(简称XSS)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#102-sql注入"><span class="toc-text"> 10.2 SQL注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#103-跨站请求伪造cross-site-request-forgey简称csrf"><span class="toc-text"> 10.3 跨站请求伪造(Cross-Site Request Forgey)(简称CSRF)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-社会工程学攻击"><span class="toc-text"> 11 社会工程学攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-恶意程序概述"><span class="toc-text"> 12 恶意程序概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#121-病毒与蠕虫"><span class="toc-text"> 12.1 病毒与蠕虫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#122-木马与网页木马"><span class="toc-text"> 12.2 木马与网页木马</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"网络空间安全导论笔记　| TappaT's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <section class="livere" id="comments">
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80Njk4My8yMzQ4Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/11/09/Address/" title="上一篇: Gettysburg Address">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/10/24/MySQL基础入门/" title="下一篇: MySQL基础入门">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/25/本科数据结构算法题整理/">本科数据结构算法题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Speech/">Churchill broadcast speech</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Address/">Gettysburg Address</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/网络空间安全导论笔记/">网络空间安全导论笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/MySQL基础入门/">MySQL基础入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/23/ucosⅡ移植mini2440及其应用/">ucosⅡ移植mini2440及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/">C++中结构体与类的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/一些有价值的网页/">一些有价值的网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/09/FPGA产生m序列及其应用/">FPGA产生m序列及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/07/辨析arcsinsinx与arccoscosx/">辨析arcsin(sinx)与arccos(cosx)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/06/博苏克-乌拉姆定理解项链珠宝分配问题/">博苏克-乌拉姆定理解项链珠宝分配问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/05/构造函数典例及其保号性思路/">构造函数典例及其保号性思路</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/调和级数判敛/">调和级数判敛</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/C-动态内存简介/">C++动态内存简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/P站画师collection/">P站画师collection</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/FPGA二进制序列检测/">FPGA二进制序列检测</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/01/欢迎页面/">欢迎页面</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/网站更新记录/">网站更新记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/28/关于书写用笔的使用记录/">关于书写用笔的使用记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/27/DFT圆周卷积典例/">DFT圆周卷积典例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/PAT甲级1008部分正确情况分析/">PAT甲级1008部分正确情况分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/FPGA产生三路120度相位差正弦波/">FPGA产生三路120度相位差正弦波</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/FPGA实现CORDIC算法/">FPGA实现CORDIC算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/FPGA测量两路信号的相位差/">FPGA测量两路同频信号的相位差</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/人间永恒/">人间永恒</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2019 塔牌
+            </div>
+ 
+ 
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+ 
+ 
+        
+ 
+ 
+            <div class="visit">
+                
+                    <span style='display:inline'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i>本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                        </span>
+                    </span>
+                
+ 
+ 
+                
+                    <span>| </span>
+                
+ 
+ 
+                
+                    <span style='display:inline'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i>本页面被访问<span id="busuanzi_value_page_pv"></span>次
+                        </span>
+                    </span>
+                
+ 
+                
+                    <span>| </span>
+                
+ 
+ 
+                
+                    <span style='display:inline'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-user" aria-hidden="true"></i>本站访客数<span id="busuanzi_value_site_uv"></span>人
+                        </span>
+                    </span>
+                
+ 
+                
+            </div>
+        
+    </div>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("09/14/2019 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 8;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="塔牌">
+
+
+
+<meta name="description" content="嵌入式实践的一些记录">
+<meta name="keywords" content="原创,嵌入式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ucosⅡ移植mini2440及其应用">
+<meta property="og:url" content="http://tappat.top/2019/10/23/ucosⅡ移植mini2440及其应用/index.html">
+<meta property="og:site_name" content="TappaT&#39;s Blog">
+<meta property="og:description" content="嵌入式实践的一些记录">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2240port.png">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2440_zd.png">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/DNW_1.png">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2440port2.png">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/2440_2.png">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/2440_3.jpg">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2440_desktop.jpg">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2440_led.jpg">
+<meta property="og:updated_time" content="2019-11-21T08:29:24.395Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ucosⅡ移植mini2440及其应用">
+<meta name="twitter:description" content="嵌入式实践的一些记录">
+<meta name="twitter:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2240port.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="TappaT&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>ucosⅡ移植mini2440及其应用 | TappaT&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+</head></html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">塔牌</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/381102358@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/Tappai" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FPGA/">FPGA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创/">原创</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/密码学/">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小说/">小说</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵌入式/">嵌入式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数字信号处理/">数字信号处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络空间安全/">网络空间安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://litten.me/">Litten</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://xiaweizi.cn/">下位子</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">21岁、学生です</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">塔牌</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">塔牌</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/381102358@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/Tappai" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-ucosⅡ移植mini2440及其应用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/23/ucosⅡ移植mini2440及其应用/" class="article-date">
+      <time datetime="2019-10-23T09:58:15.000Z" itemprop="datePublished">2019-10-23</time>
+</a>
+
+
+
+      
+
+    </div>  
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ucosⅡ移植mini2440及其应用
+    </h1>
+  
+
+        
+          <div style="margin-top:10px 0;margin-bottom:30px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.5k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">5分</span>
+      </span>
+    </span>
+</div>
+          
+      </header>
+
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/工学/">工学</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/嵌入式/">嵌入式</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>嵌入式实践的一些记录</p>
+<a id="more"></a>
+<h2 id="1-准备阶段"><a class="markdownIt-Anchor" href="#1-准备阶段"></a> 1 准备阶段</h2>
+<p>实验环境：Windows Xp</p>
+<hr>
+<h3 id="11-先了解一下mini2440的接口布局"><a class="markdownIt-Anchor" href="#11-先了解一下mini2440的接口布局"></a> 1.1 先了解一下mini2440的接口布局</h3>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2240port.png" alt></p>
+<blockquote>
+<p>实践中至少需要接好<code>电源接口</code>、<code>串口1</code>、<code>USB Slave</code></p>
+</blockquote>
+<blockquote>
+<p>一般把选择开关设置为Nor Flash，进入BIOS模式</p>
+<blockquote>
+<p>Nor Flash模式下，程序直接烧录到内存中，断电后即失效。若是选择NAND Flash，则能将程序断电后也保留。</p>
+</blockquote>
+</blockquote>
+<hr>
+<h3 id="12-步骤说明"><a class="markdownIt-Anchor" href="#12-步骤说明"></a> 1.2 步骤说明</h3>
+<p>由于环境等原因，我自己测试的时候按如下步骤才能顺利进行：</p>
+<ol>
+<li>插好必要接口，<strong>此时不要打开电源</strong></li>
+<li>在电脑上安装好驱动</li>
+<li>打开超级终端</li>
+<li>打开DNW</li>
+<li><strong>到这一步，再打开电源</strong></li>
+</ol>
+<hr>
+<h3 id="13-安装驱动"><a class="markdownIt-Anchor" href="#13-安装驱动"></a> 1.3 安装驱动</h3>
+<p>安装附盘中的FriendlyARM USB Download Driver（先不用接上板子）</p>
+<blockquote>
+<p>注：原本想在win10上操作，然而win10系统下安装总是失败，更换设备也一样</p>
+</blockquote>
+<hr>
+<h3 id="14-检测驱动"><a class="markdownIt-Anchor" href="#14-检测驱动"></a> 1.4 检测驱动</h3>
+<p>选择开关Nor Flash，连接到PC，打开电源，按照硬件向导提示完成配置</p>
+<blockquote>
+<p>注：这一步是在最后才出现的</p>
+</blockquote>
+<hr>
+<h3 id="15-设置超级终端"><a class="markdownIt-Anchor" href="#15-设置超级终端"></a> 1.5 设置超级终端</h3>
+<p>在WindowsXP环境下，在<code>开始--&gt;程序--&gt;附件--&gt;通讯</code>中，打开<code>超级终端</code></p>
+<blockquote>
+<p>默认Telnet程序？ 选择“否”</p>
+<p>位置信息   选择“取消”</p>
+<p>确定取消吗？ 选择“是”</p>
+<p>再点击 “是”</p>
+<p>连接描述  随便输入一个名称</p>
+<p>连接到…   这里直接选默认端口 COM:X(如果发现不是1~4的端口需要先去硬件里修改)</p>
+</blockquote>
+<p>接下来是重点步骤</p>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2440_zd.png" alt></p>
+<p>这一步，<strong>每秒位数(波特率)要设置为115200</strong>，<strong>数据流控制要选择无</strong>，否则无法正常连接</p>
+<p>接着再处理好弹出窗口就到超级终端传输页面了。</p>
+<h3 id="16-dnw设置"><a class="markdownIt-Anchor" href="#16-dnw设置"></a> 1.6 DNW设置</h3>
+<p>一开始要先设置好端口，点Configuration中的options进行设置</p>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/DNW_1.png" alt></p>
+<blockquote>
+<p>根据mini2440用户手册说明，需要把下载地址改为0x30000000</p>
+</blockquote>
+<p>可以看到DNW里只能检测4个端口，然而实际上板子经常会默认接到COM5或者COM6端口上</p>
+<p>这种情况可以到设备管理器中，找到端口栏，在对应的端口上右键属性进行修改</p>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2440port2.png" alt></p>
+<p>看下COM1~COM4里面哪个未被占用就改成那个</p>
+<blockquote>
+<p>一般情况下不需要更改COM口</p>
+</blockquote>
+<h3 id="17-下载测试"><a class="markdownIt-Anchor" href="#17-下载测试"></a> 1.7 下载测试</h3>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/2440_2.png" alt></p>
+<p>在超级终端输入<code>d</code>，进入待下载状态</p>
+<hr>
+<p>然后打开DNW，在<code>USB Port</code>菜单中选择<code>Transmit</code>，选择附盘中的测试文件，下载完成后，如下</p>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/2440_3.jpg" alt></p>
+<h2 id="2-ucos移植准备"><a class="markdownIt-Anchor" href="#2-ucos移植准备"></a> 2 UCOS移植准备</h2>
+<p>系统环境：Windows Xp</p>
+<p>编译软件：ADS1.2</p>
+<h3 id="21-工程文件"><a class="markdownIt-Anchor" href="#21-工程文件"></a> 2.1 工程文件</h3>
+<p>附带光盘文件中已经给我们准备好了ucos的工程文件，找到<code>uCos2</code>文件夹，备份一份，然后把文件夹属性中的<code>只读</code>去掉</p>
+<hr>
+<h3 id="22-编译"><a class="markdownIt-Anchor" href="#22-编译"></a> 2.2 编译</h3>
+<p>点<code>File--&gt;Open</code>，找到<code>uCOS_2440.mcp</code>并选择。</p>
+<p>接着点<code>Project--&gt;Make</code>编译。</p>
+<blockquote>
+<p>自己刚开始编译的时候，位于<code>\uCos2\S3C2440\source\</code>下的<code>ucos2_vga_1024x768_demo.c</code>这个文件各种报错，之后发现这文件对我们的实验并没有什么影响，于是删除就好了。</p>
+</blockquote>
+<p>编译完成后，在<code>\uCos2\uCos_2440_Data\DebugRel</code>目录下会生成<code>2440ucos2.bin</code>，这个bin文件就可以直接像上面使用的测试文件那样下载到mini2440内存中运行了。</p>
+<hr>
+<h3 id="23-调整"><a class="markdownIt-Anchor" href="#23-调整"></a> 2.3 调整</h3>
+<p>我们实验所用的LCD屏幕型号是<code>W35</code>，是新出的一款产品，原始代码并没有这个型号屏幕的对应设置</p>
+<blockquote>
+<p>W35数据：Height 240 x Width 320</p>
+</blockquote>
+<p>先前烧录的结果会发现画面显示不完整。</p>
+<blockquote>
+<p>因为它使用的型号是T35</p>
+</blockquote>
+<p>打开<code>\uCos2\S3C2440\includes\Option.h</code>，这个文件中包含了屏幕显示的相关参数设置</p>
+<p>稍微浏览一下可以发现默认用的是LCD_T35，那我们就干脆修改T35的数据</p>
+<p>网上找了一篇相关文章：<a href="https://blog.csdn.net/dengwenq/article/details/7904149" target="_blank" rel="noopener">linux2.6.32.2 mini2440平台移植-- LCD 显示驱动 ( W35屏 )</a></p>
+<p>参考里面的数据把相应的那段代码改成这样：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(LCD_T35)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_WIDTH 320</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_HEIGHT 240</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_PIXCLOCK 4 <span class="comment">//这个按原本的，不修改</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_RIGHT_MARGIN 68</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_LEFT_MARGIN 66</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_HSYNC_LEN 4</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_UPPER_MARGIN 4</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_LOWER_MARGIN 4</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_VSYNC_LEN 9</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_CON5 ( (1 &lt;&lt; 11)| (1&lt;&lt;0) | (1 &lt;&lt; 8) | (1 &lt;&lt; 6) | (1 &lt;&lt; 9) | ( 1&lt;&lt; 10)) <span class="comment">//这个也不修改</span></span></span><br></pre></td></tr></table></figure>
+<p>改完重新编译，下载。</p>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2440_desktop.jpg" alt></p>
+<hr>
+<h3 id="24-小灯测试"><a class="markdownIt-Anchor" href="#24-小灯测试"></a> 2.4 小灯测试</h3>
+<p>打开<code>\uCos2\S3C2440\source\main.c</code>，这里面有两个任务段</p>
+<p>看下Task1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Task1</span>	<span class="params">(<span class="keyword">void</span> *pdata)</span> <span class="comment">//task for test</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	U16 TestCnt=<span class="number">0</span>;</span><br><span class="line">	U16 Version;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	Version=OSVersion();	</span><br><span class="line">	</span><br><span class="line">			</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">	</span><br><span class="line">	 TestCnt++;</span><br><span class="line">     OSPrintf(<span class="string">"********************************\n"</span>);</span><br><span class="line">     OSPrintf(<span class="string">"Enter Task1 Cnt=%d\n"</span>,TestCnt);	</span><br><span class="line">     OSPrintf(<span class="string">"Enter Task1\n"</span>);</span><br><span class="line">     OSPrintf(<span class="string">"uC/OS Version:V%4.2f\n"</span>,(<span class="keyword">float</span>)Version*<span class="number">0.01</span>);<span class="comment">//ucos version </span></span><br><span class="line">     OSPrintf(<span class="string">"********************************\n"</span>);</span><br><span class="line">     </span><br><span class="line">     <span class="comment">//led </span></span><br><span class="line">     <span class="keyword">if</span>(TestCnt%<span class="number">2</span>)</span><br><span class="line">     	rGPBDAT = <span class="number">0x0000</span>;</span><br><span class="line">     <span class="keyword">else</span></span><br><span class="line">    	rGPBDAT = <span class="number">0x07fe</span>;</span><br><span class="line">    	</span><br><span class="line">     OSTimeDly(OS_TICKS_PER_SEC);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个就是控制小灯的任务，修改<code>OSTimeDly</code>中的值即可改变小灯亮暗间隔。</p>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2440_led.jpg" alt></p>
+<hr>
+<h3 id="25-时间显示"><a class="markdownIt-Anchor" href="#25-时间显示"></a> 2.5 时间显示</h3>
+<p><code>main.c</code>里的Task2就是时间显示功能，不过默认代码里把这个任务关了，找到</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(LCD_N35) || defined(LCD_T35) || defined(LCD_X35)</span></span><br></pre></td></tr></table></figure>
+<p>这段代码，下面有句<code>#if 0</code>改为<code>#if 1</code>就可以开启。</p>
+<h2 id="3-内存管理"><a class="markdownIt-Anchor" href="#3-内存管理"></a> 3 内存管理</h2>
+<p>以下内容属于理论猜测，板子还给老师了，没实际测试过</p>
+<h3 id="31-代码分析"><a class="markdownIt-Anchor" href="#31-代码分析"></a> 3.1 代码分析</h3>
+<p>打开<code>\uCos2\uCos_Ⅱ\SOURCE\os_mem.c</code>文件，找到<code>OSMemCreate</code>函数代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">OS_MEM  *<span class="title">OSMemCreate</span> <span class="params">(<span class="keyword">void</span> *addr, INT32U nblks, INT32U blksize, INT8U *err)</span></span></span><br></pre></td></tr></table></figure>
+<p>可以看到，函数包含4个参数，其中<code>INT32U blksize</code>是内存块大小。</p>
+<h3 id="32-修改内存块大小"><a class="markdownIt-Anchor" href="#32-修改内存块大小"></a> 3.2 修改内存块大小</h3>
+<p>整个工程中仅有一处涉及到内存块创建，打开<code>\uCos2\Printf\Printf.c</code>，其中有如下代码段</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OSPrintfInit</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">	INT8U err;</span><br><span class="line">	pUartMem=OSMemCreate(UartBuf,UartMsgNum,UartMsgBufLengh,&amp;err);<span class="comment">//Create a mem for Uart post Msg</span></span><br><span class="line">	</span><br><span class="line">	pUart_Q=OSQCreate(&amp;MsgUart[<span class="number">0</span>],UartMsgNum);<span class="comment">//Create a Quen for Uart</span></span><br><span class="line">	</span><br><span class="line">	OSTaskCreate(TaskUart,(<span class="keyword">void</span>*)<span class="number">0</span>,&amp;TaskUartStk[TaskUartStkLengh<span class="number">-1</span>],TaskUartPrio);<span class="comment">//Creat a Task to sent Msg to Uart</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中对<code>UartMsgBufLengh</code>的定义为</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> UartMsgBufLengh 100</span></span><br></pre></td></tr></table></figure>
+<p>即内存块大小为4*100=400字节，若要修改内存块大小，修改该值即可。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/10/23/ucosⅡ移植mini2440及其应用/">ucosⅡ移植mini2440及其应用</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">塔牌</a></p>
+        <p><span>发布时间:</span>2019-10-23, 17:58:15</p>
+        <p><span>最后更新:</span>2019-11-21, 16:29:24</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/10/23/ucosⅡ移植mini2440及其应用/" title="ucosⅡ移植mini2440及其应用">http://tappat.top/2019/10/23/ucosⅡ移植mini2440及其应用/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://tappat.top/2019/10/23/ucosⅡ移植mini2440及其应用/　　作者: 塔牌" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/10/24/MySQL基础入门/">
+                    MySQL基础入门
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/">
+                    C++中结构体与类的区别
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-准备阶段"><span class="toc-text"> 1 准备阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-先了解一下mini2440的接口布局"><span class="toc-text"> 1.1 先了解一下mini2440的接口布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-步骤说明"><span class="toc-text"> 1.2 步骤说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-安装驱动"><span class="toc-text"> 1.3 安装驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-检测驱动"><span class="toc-text"> 1.4 检测驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-设置超级终端"><span class="toc-text"> 1.5 设置超级终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-dnw设置"><span class="toc-text"> 1.6 DNW设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-下载测试"><span class="toc-text"> 1.7 下载测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ucos移植准备"><span class="toc-text"> 2 UCOS移植准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-工程文件"><span class="toc-text"> 2.1 工程文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-编译"><span class="toc-text"> 2.2 编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-调整"><span class="toc-text"> 2.3 调整</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-小灯测试"><span class="toc-text"> 2.4 小灯测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-时间显示"><span class="toc-text"> 2.5 时间显示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-内存管理"><span class="toc-text"> 3 内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#31-代码分析"><span class="toc-text"> 3.1 代码分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-修改内存块大小"><span class="toc-text"> 3.2 修改内存块大小</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"ucosⅡ移植mini2440及其应用　| TappaT's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <section class="livere" id="comments">
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80Njk4My8yMzQ4Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/10/24/MySQL基础入门/" title="上一篇: MySQL基础入门">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/" title="下一篇: C++中结构体与类的区别">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/25/本科数据结构算法题整理/">本科数据结构算法题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Speech/">Churchill broadcast speech</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Address/">Gettysburg Address</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/网络空间安全导论笔记/">网络空间安全导论笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/MySQL基础入门/">MySQL基础入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/23/ucosⅡ移植mini2440及其应用/">ucosⅡ移植mini2440及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/">C++中结构体与类的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/一些有价值的网页/">一些有价值的网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/09/FPGA产生m序列及其应用/">FPGA产生m序列及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/07/辨析arcsinsinx与arccoscosx/">辨析arcsin(sinx)与arccos(cosx)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/06/博苏克-乌拉姆定理解项链珠宝分配问题/">博苏克-乌拉姆定理解项链珠宝分配问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/05/构造函数典例及其保号性思路/">构造函数典例及其保号性思路</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/调和级数判敛/">调和级数判敛</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/C-动态内存简介/">C++动态内存简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/P站画师collection/">P站画师collection</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/FPGA二进制序列检测/">FPGA二进制序列检测</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/01/欢迎页面/">欢迎页面</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/网站更新记录/">网站更新记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/28/关于书写用笔的使用记录/">关于书写用笔的使用记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/27/DFT圆周卷积典例/">DFT圆周卷积典例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/PAT甲级1008部分正确情况分析/">PAT甲级1008部分正确情况分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/FPGA产生三路120度相位差正弦波/">FPGA产生三路120度相位差正弦波</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/FPGA实现CORDIC算法/">FPGA实现CORDIC算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/FPGA测量两路信号的相位差/">FPGA测量两路同频信号的相位差</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/人间永恒/">人间永恒</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2019 塔牌
+            </div>
+ 
+ 
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+ 
+ 
+        
+ 
+ 
+            <div class="visit">
+                
+                    <span style='display:inline'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i>本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                        </span>
+                    </span>
+                
+ 
+ 
+                
+                    <span>| </span>
+                
+ 
+ 
+                
+                    <span style='display:inline'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i>本页面被访问<span id="busuanzi_value_page_pv"></span>次
+                        </span>
+                    </span>
+                
+ 
+                
+                    <span>| </span>
+                
+ 
+ 
+                
+                    <span style='display:inline'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-user" aria-hidden="true"></i>本站访客数<span id="busuanzi_value_site_uv"></span>人
+                        </span>
+                    </span>
+                
+ 
+                
+            </div>
+        
+    </div>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("09/14/2019 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 8;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>

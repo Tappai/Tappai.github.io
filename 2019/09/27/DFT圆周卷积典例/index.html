@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="塔牌">
+
+
+
+<meta name="description" content="题目 已知x(n)={1,0,2,1,3}，求x(n)∗x(n)，x(n)⑤x(n)，x(n)⑩x(n)">
+<meta name="keywords" content="原创,数字信号处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DFT圆周卷积典例">
+<meta property="og:url" content="http://tappat.top/2019/09/27/DFT圆周卷积典例/index.html">
+<meta property="og:site_name" content="TappaT&#39;s Blog">
+<meta property="og:description" content="题目 已知x(n)={1,0,2,1,3}，求x(n)∗x(n)，x(n)⑤x(n)，x(n)⑩x(n)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/%E5%BA%8F%E5%88%971.png">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/DS/dft.png">
+<meta property="og:updated_time" content="2019-10-22T11:50:23.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DFT圆周卷积典例">
+<meta name="twitter:description" content="题目 已知x(n)={1,0,2,1,3}，求x(n)∗x(n)，x(n)⑤x(n)，x(n)⑩x(n)">
+<meta name="twitter:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/%E5%BA%8F%E5%88%971.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="TappaT&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>DFT圆周卷积典例 | TappaT&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script><!-- hexo-inject:begin --><link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css'><!-- hexo-inject:end -->
+
+
+
+
+
+
+</head></html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">塔牌</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/381102358@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/Tappai" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FPGA/">FPGA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创/">原创</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/密码学/">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小说/">小说</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵌入式/">嵌入式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数字信号处理/">数字信号处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络空间安全/">网络空间安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://litten.me/">Litten</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://xiaweizi.cn/">下位子</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">21岁、学生です</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">塔牌</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">塔牌</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/381102358@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/Tappai" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-DFT圆周卷积典例" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/27/DFT圆周卷积典例/" class="article-date">
+      <time datetime="2019-09-27T04:01:05.000Z" itemprop="datePublished">2019-09-27</time>
+</a>
+
+
+
+      
+
+    </div>  
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DFT圆周卷积典例
+    </h1>
+  
+
+        
+          <div style="margin-top:10px 0;margin-bottom:30px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">686字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">4分</span>
+      </span>
+    </span>
+</div>
+          
+      </header>
+
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数字信号处理/">数字信号处理</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
+<p>已知x(n)={1,0,2,1,3}，求x(n)∗x(n)，x(n)⑤x(n)，x(n)⑩x(n)</p>
+<a id="more"></a>
+<h2 id="解答过程"><a class="markdownIt-Anchor" href="#解答过程"></a> 解答过程</h2>
+<h3 id="1xnxn"><a class="markdownIt-Anchor" href="#1xnxn"></a> （1）x(n)∗x(n)</h3>
+<p>列表：</p>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/%E5%BA%8F%E5%88%971.png" alt></p>
+<p><strong>把划线中间的区域各自加起来</strong></p>
+<p>得到：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">[</mo><mtable rowspacing="0.15999999999999992em" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>4</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>2</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>10</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>4</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>13</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>6</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>9</mn></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">y(n)=
+\left[ \begin{matrix} 1 \\ 0 \\ 4 \\ 2 \\ 10 \\ 4 \\ 13 \\ 6 \\ 9 \end{matrix} \right]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:10.81204em;vertical-align:-5.150079999999999em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:5.6619600000000005em;"><span style="top:1.3500599999999987em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎣</span></span></span><span style="top:0.1950599999999989em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-0.4059400000000011em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-1.006940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-1.607940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-2.208940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-2.809940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-3.410940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-4.011940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-4.612940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-5.213940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-5.814940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-6.415940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-7.6619600000000005em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎡</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:5.150079999999999em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:5.6499999999999995em;"><span style="top:-7.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span><span style="top:-6.609999999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-5.409999999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span></span></span><span style="top:-4.209999999999999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.0099999999999985em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord">0</span></span></span><span style="top:-1.8099999999999985em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span></span></span><span style="top:-0.6099999999999983em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord">3</span></span></span><span style="top:0.590000000000001em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">6</span></span></span><span style="top:1.7900000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">9</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:5.15em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:5.6619600000000005em;"><span style="top:1.3500599999999987em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎦</span></span></span><span style="top:0.1950599999999989em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-0.4059400000000011em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-1.006940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-1.607940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-2.208940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-2.809940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-3.410940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-4.011940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-4.612940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-5.213940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-5.814940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-6.415940000000001em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-7.6619600000000005em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎤</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:5.150079999999999em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>待续…</p>
+<h2 id="c语言实现"><a class="markdownIt-Anchor" href="#c语言实现"></a> C语言实现</h2>
+<h3 id="线性卷积序列"><a class="markdownIt-Anchor" href="#线性卷积序列"></a> 线性卷积序列</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">conv</span><span class="params">(<span class="keyword">int</span> x[],<span class="keyword">int</span> y[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,s=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(n=<span class="number">1</span>;n&lt;=<span class="number">9</span>;n++)&#123;</span><br><span class="line">        y[n]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> m=<span class="number">0</span>;m&lt;=n<span class="number">-1</span>;m++)&#123;</span><br><span class="line">            s=n-m<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">if</span>(m&lt;<span class="number">0</span>||m&gt;=<span class="number">5</span>)&#123;</span><br><span class="line">               y[n]+=<span class="number">0</span>;&#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(s&lt;<span class="number">0</span>||s&gt;=<span class="number">5</span>)&#123;</span><br><span class="line">                y[n]+=<span class="number">0</span>;&#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                y[n]+=x[m]*x[s];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="5点圆周卷积"><a class="markdownIt-Anchor" href="#5点圆周卷积"></a> 5点圆周卷积</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">R_5</span><span class="params">(<span class="keyword">int</span> x[],<span class="keyword">int</span> y[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>;n&lt;<span class="number">5</span>;n++)&#123;</span><br><span class="line">        y[n]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> m=<span class="number">0</span>;m&lt;<span class="number">5</span>;m++)&#123;</span><br><span class="line">            t=(n-m);</span><br><span class="line">            <span class="keyword">if</span>(t&lt;<span class="number">0</span>)&#123;t=t+<span class="number">5</span>;&#125;</span><br><span class="line">            y[n]+=x[t]*x[m];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="10点圆周卷积"><a class="markdownIt-Anchor" href="#10点圆周卷积"></a> 10点圆周卷积</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">R_10</span><span class="params">(<span class="keyword">int</span> x[],<span class="keyword">int</span> y[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>;n&lt;<span class="number">10</span>;n++)&#123;</span><br><span class="line">        y[n]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> m=<span class="number">0</span>;m&lt;<span class="number">10</span>;m++)&#123;</span><br><span class="line">            t=(n-m);</span><br><span class="line">            <span class="keyword">if</span>(t&lt;<span class="number">0</span>)&#123;t=t+<span class="number">10</span>;&#125;</span><br><span class="line">            y[n]+=x[t]*x[m];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="运行结果"><a class="markdownIt-Anchor" href="#运行结果"></a> 运行结果</h3>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/DS/dft.png" alt></p>
+<hr>
+<h3 id="完整代码实际用的是c"><a class="markdownIt-Anchor" href="#完整代码实际用的是c"></a> 完整代码(实际用的是C++)</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*线性卷积*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">conv</span><span class="params">(<span class="keyword">int</span> x[],<span class="keyword">int</span> y[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,s=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(n=<span class="number">1</span>;n&lt;=<span class="number">9</span>;n++)&#123;</span><br><span class="line">        y[n]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> m=<span class="number">0</span>;m&lt;=n<span class="number">-1</span>;m++)&#123;</span><br><span class="line">            s=n-m<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">if</span>(m&lt;<span class="number">0</span>||m&gt;=<span class="number">5</span>)&#123;</span><br><span class="line">               y[n]+=<span class="number">0</span>;&#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(s&lt;<span class="number">0</span>||s&gt;=<span class="number">5</span>)&#123;</span><br><span class="line">                y[n]+=<span class="number">0</span>;&#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                y[n]+=x[m]*x[s];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*5点圆周卷积*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">R_5</span><span class="params">(<span class="keyword">int</span> x[],<span class="keyword">int</span> y[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>;n&lt;<span class="number">5</span>;n++)&#123;</span><br><span class="line">        y[n]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> m=<span class="number">0</span>;m&lt;<span class="number">5</span>;m++)&#123;</span><br><span class="line">            t=(n-m);</span><br><span class="line">            <span class="keyword">if</span>(t&lt;<span class="number">0</span>)&#123;t=t+<span class="number">5</span>;&#125;</span><br><span class="line">            y[n]+=x[t]*x[m];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*10点圆周卷积*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">R_10</span><span class="params">(<span class="keyword">int</span> x[],<span class="keyword">int</span> y[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>;n&lt;<span class="number">10</span>;n++)&#123;</span><br><span class="line">        y[n]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> m=<span class="number">0</span>;m&lt;<span class="number">10</span>;m++)&#123;</span><br><span class="line">            t=(n-m);</span><br><span class="line">            <span class="keyword">if</span>(t&lt;<span class="number">0</span>)&#123;t=t+<span class="number">10</span>;&#125;</span><br><span class="line">            y[n]+=x[t]*x[m];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x[<span class="number">10</span>]=&#123;<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> y_conv[<span class="number">10</span>]=&#123;<span class="number">0</span>&#125;,y_5[<span class="number">10</span>]=&#123;<span class="number">0</span>&#125;,y_10[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">int</span> y_conv_temp[<span class="number">15</span>]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">    conv(x,y_conv_temp);</span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">    for(int i=1;i&lt;=9;i++)&#123;</span></span><br><span class="line"><span class="comment">        cout&lt;&lt;"y_conv["&lt;&lt;i&lt;&lt;"]="&lt;&lt;y_conv[i]&lt;&lt;endl;</span></span><br><span class="line"><span class="comment">    &#125; </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;<span class="number">10</span>;k++)&#123;</span><br><span class="line">       y_conv[k]=y_conv_temp[k+<span class="number">1</span>];</span><br><span class="line">   &#125;</span><br><span class="line">    R_5(x,y_5);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    for(int i=0;i&lt;=4;i++)&#123;</span></span><br><span class="line"><span class="comment">        cout&lt;&lt;"y_5["&lt;&lt;i&lt;&lt;"]="&lt;&lt;y_5[i]&lt;&lt;endl;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    R_10(x,y_10);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    for(int i=0;i&lt;=9;i++)&#123;</span></span><br><span class="line"><span class="comment">        cout&lt;&lt;"y_10["&lt;&lt;i+1&lt;&lt;"]="&lt;&lt;y_10[i]&lt;&lt;endl;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    */</span>  </span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">9</span>;i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"y_conv["</span>&lt;&lt;i+<span class="number">1</span>&lt;&lt;<span class="string">"]="</span>&lt;&lt;y_conv[i]&lt;&lt;<span class="string">"    "</span>&lt;&lt;<span class="string">"y_5["</span>&lt;&lt;i+<span class="number">1</span>&lt;&lt;<span class="string">"]="</span>&lt;&lt;y_5[i]&lt;&lt;<span class="string">"    "</span>&lt;&lt;<span class="string">"y_10["</span>&lt;&lt;i+<span class="number">1</span>&lt;&lt;<span class="string">"]="</span>&lt;&lt;y_10[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/09/27/DFT圆周卷积典例/">DFT圆周卷积典例</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">塔牌</a></p>
+        <p><span>发布时间:</span>2019-09-27, 12:01:05</p>
+        <p><span>最后更新:</span>2019-10-22, 19:50:23</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/27/DFT圆周卷积典例/" title="DFT圆周卷积典例">http://tappat.top/2019/09/27/DFT圆周卷积典例/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://tappat.top/2019/09/27/DFT圆周卷积典例/　　作者: 塔牌" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/09/28/关于书写用笔的使用记录/">
+                    关于书写用笔的使用记录
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/09/25/PAT甲级1008部分正确情况分析/">
+                    PAT甲级1008部分正确情况分析
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目"><span class="toc-text"> 题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解答过程"><span class="toc-text"> 解答过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1xnxn"><span class="toc-text"> （1）x(n)∗x(n)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c语言实现"><span class="toc-text"> C语言实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性卷积序列"><span class="toc-text"> 线性卷积序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5点圆周卷积"><span class="toc-text"> 5点圆周卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10点圆周卷积"><span class="toc-text"> 10点圆周卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行结果"><span class="toc-text"> 运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整代码实际用的是c"><span class="toc-text"> 完整代码(实际用的是C++)</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"DFT圆周卷积典例　| TappaT's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <section class="livere" id="comments">
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80Njk4My8yMzQ4Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/09/28/关于书写用笔的使用记录/" title="上一篇: 关于书写用笔的使用记录">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/09/25/PAT甲级1008部分正确情况分析/" title="下一篇: PAT甲级1008部分正确情况分析">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/25/本科数据结构算法题整理/">本科数据结构算法题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Speech/">Churchill broadcast speech</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Address/">Gettysburg Address</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/网络空间安全导论笔记/">网络空间安全导论笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/MySQL基础入门/">MySQL基础入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/23/ucosⅡ移植mini2440及其应用/">ucosⅡ移植mini2440及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/">C++中结构体与类的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/一些有价值的网页/">一些有价值的网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/09/FPGA产生m序列及其应用/">FPGA产生m序列及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/07/辨析arcsinsinx与arccoscosx/">辨析arcsin(sinx)与arccos(cosx)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/06/博苏克-乌拉姆定理解项链珠宝分配问题/">博苏克-乌拉姆定理解项链珠宝分配问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/05/构造函数典例及其保号性思路/">构造函数典例及其保号性思路</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/调和级数判敛/">调和级数判敛</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/C-动态内存简介/">C++动态内存简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/P站画师collection/">P站画师collection</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/FPGA二进制序列检测/">FPGA二进制序列检测</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/01/欢迎页面/">欢迎页面</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/网站更新记录/">网站更新记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/28/关于书写用笔的使用记录/">关于书写用笔的使用记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/27/DFT圆周卷积典例/">DFT圆周卷积典例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/PAT甲级1008部分正确情况分析/">PAT甲级1008部分正确情况分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/FPGA产生三路120度相位差正弦波/">FPGA产生三路120度相位差正弦波</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/FPGA实现CORDIC算法/">FPGA实现CORDIC算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/FPGA测量两路信号的相位差/">FPGA测量两路同频信号的相位差</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/人间永恒/">人间永恒</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2019 塔牌
+            </div>
+ 
+ 
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+ 
+ 
+        
+ 
+ 
+            <div class="visit">
+                
+                    <span style='display:inline'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i>本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                        </span>
+                    </span>
+                
+ 
+ 
+                
+                    <span>| </span>
+                
+ 
+ 
+                
+                    <span style='display:inline'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i>本页面被访问<span id="busuanzi_value_page_pv"></span>次
+                        </span>
+                    </span>
+                
+ 
+                
+                    <span>| </span>
+                
+ 
+ 
+                
+                    <span style='display:inline'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-user" aria-hidden="true"></i>本站访客数<span id="busuanzi_value_site_uv"></span>人
+                        </span>
+                    </span>
+                
+ 
+                
+            </div>
+        
+    </div>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("09/14/2019 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 8;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>

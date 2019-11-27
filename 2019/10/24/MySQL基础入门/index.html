@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="塔牌">
+
+
+
+<meta name="description" content="本内容基于实验楼网站提供的 MySQL 基础课程  ，共六个章节加一个挑战内容。">
+<meta name="keywords" content="原创,数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL基础入门">
+<meta property="og:url" content="http://tappat.top/2019/10/24/MySQL基础入门/index.html">
+<meta property="og:site_name" content="TappaT&#39;s Blog">
+<meta property="og:description" content="本内容基于实验楼网站提供的 MySQL 基础课程  ，共六个章节加一个挑战内容。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191020-1571582165687">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191020-1571582263095">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191021-1571645124537">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191021-1571645750873">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191021-1571646503968">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191021-1571646745965">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571843471962">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571844232914">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571844375411">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571844583758">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571845121539">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571845212636">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571845453219">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572186871263">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572187461325">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572187624786">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572187709072">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572187991703">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572188245060">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572188369454">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572188787708">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572189281405">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572189447462">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572189612143">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572191387699">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191028-1572272169192">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191028-1572272502479">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191028-1572272591178">
+<meta property="og:image" content="https://doc.shiyanlou.com/MySQL/sql-05-05.png/wm">
+<meta property="og:image" content="https://doc.shiyanlou.com/MySQL/sql-05-06.png/wm">
+<meta property="og:image" content="https://doc.shiyanlou.com/MySQL/sql-05-07.png/wm">
+<meta property="og:image" content="https://doc.shiyanlou.com/MySQL/sql-05-10.png/wm">
+<meta property="og:image" content="https://doc.shiyanlou.com/MySQL/sql-05-11.png/wm">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572616720326">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572618288640">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572618902708">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572619653336">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572620139432">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572621222674">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572621476756">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572621805749">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572622190476">
+<meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572622827849">
+<meta property="og:updated_time" content="2019-11-01T15:59:16.339Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL基础入门">
+<meta name="twitter:description" content="本内容基于实验楼网站提供的 MySQL 基础课程  ，共六个章节加一个挑战内容。">
+<meta name="twitter:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191020-1571582165687">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="TappaT&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>MySQL基础入门 | TappaT&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+</head></html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">塔牌</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/381102358@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/Tappai" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FPGA/">FPGA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创/">原创</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/密码学/">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小说/">小说</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/嵌入式/">嵌入式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数字信号处理/">数字信号处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络空间安全/">网络空间安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://litten.me/">Litten</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://xiaweizi.cn/">下位子</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">21岁、学生です</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">塔牌</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">塔牌</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/381102358@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/Tappai" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-MySQL基础入门" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/24/MySQL基础入门/" class="article-date">
+      <time datetime="2019-10-24T11:46:30.000Z" itemprop="datePublished">2019-10-24</time>
+</a>
+
+
+
+      
+
+    </div>  
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL基础入门
+    </h1>
+  
+
+        
+          <div style="margin-top:10px 0;margin-bottom:30px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">4.2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">16分</span>
+      </span>
+    </span>
+</div>
+          
+      </header>
+
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/工学/">工学</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>本内容基于实验楼网站提供的<a href="https://www.shiyanlou.com/courses/9" target="_blank" rel="noopener"> MySQL 基础课程 </a> ，共六个章节加一个挑战内容。</p>
+<a id="more"></a>
+<h2 id="sql-介绍及-mysql-安装"><a class="markdownIt-Anchor" href="#sql-介绍及-mysql-安装"></a> SQL 介绍及 MySQL 安装</h2>
+<h3 id="连接并进入数据库"><a class="markdownIt-Anchor" href="#连接并进入数据库"></a> 连接并进入数据库</h3>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191020-1571582165687" alt="图片描述"></p>
+<h3 id="查看数据库信息"><a class="markdownIt-Anchor" href="#查看数据库信息"></a> 查看数据库信息</h3>
+<p>输入</p>
+<blockquote>
+<p>show databases;  //不要漏了分号“;”</p>
+</blockquote>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191020-1571582263095" alt="图片描述"></p>
+<h2 id="创建数据库并插入数据"><a class="markdownIt-Anchor" href="#创建数据库并插入数据"></a> 创建数据库并插入数据</h2>
+<h3 id="进入数据库"><a class="markdownIt-Anchor" href="#进入数据库"></a> 进入数据库</h3>
+<blockquote>
+<p>$ sudo service mysql start</p>
+</blockquote>
+<blockquote>
+<p>$ mysql -u root</p>
+</blockquote>
+<h3 id="创建数据库"><a class="markdownIt-Anchor" href="#创建数据库"></a> 创建数据库</h3>
+<blockquote>
+<p>create database mysql_shiyan;</p>
+</blockquote>
+<p>创建后查看数据库列表</p>
+<blockquote>
+<p>show databases;</p>
+</blockquote>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191021-1571645124537" alt="图片描述"></p>
+<h3 id="切换到新创建的数据库下"><a class="markdownIt-Anchor" href="#切换到新创建的数据库下"></a> 切换到新创建的数据库下</h3>
+<blockquote>
+<p>use mysql_shiyan;</p>
+</blockquote>
+<p>查看该数据库中的表信息</p>
+<blockquote>
+<p>show tables;</p>
+</blockquote>
+<h3 id="创建新的表"><a class="markdownIt-Anchor" href="#创建新的表"></a> 创建新的表</h3>
+<p>mysql_shiyan 中新建一张表 employee，包含姓名，ID 和电话信息，语句为：</p>
+<blockquote>
+<p>create table employee (id int(10),name char(20),phone int(12));</p>
+</blockquote>
+<p>可以一次性输入一整句，也可以每小段分行回车输入。</p>
+<p>创建两张新表后，输入：</p>
+<blockquote>
+<p>show tables;</p>
+</blockquote>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191021-1571645750873" alt="图片描述"></p>
+<h3 id="插入数据"><a class="markdownIt-Anchor" href="#插入数据"></a> 插入数据</h3>
+<p>向表employee中插入数据，输入：</p>
+<blockquote>
+<p>insert into employee(id,name,phone) values(01,‘Tom’,110110110);</p>
+</blockquote>
+<p>如果继续添加对应id,name,phone的数据，则可省略该声明，例如：</p>
+<blockquote>
+<p>insert into employee values(02,‘Jack’,119119119);</p>
+</blockquote>
+<p>但如果继续添加的对应数据有变，比如接下来只添加新的id和name，则要重新声明，输入：</p>
+<blockquote>
+<p>insert into employee(id,name) values(03,‘Rose’);</p>
+</blockquote>
+<h3 id="查看表中信息"><a class="markdownIt-Anchor" href="#查看表中信息"></a> 查看表中信息</h3>
+<blockquote>
+<p>select *from employee;</p>
+</blockquote>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191021-1571646503968" alt="图片描述"></p>
+<h3 id="课后习题"><a class="markdownIt-Anchor" href="#课后习题"></a> 课后习题</h3>
+<p>新建一个名为 library 的数据库，包含 book、reader 两张表，根据自己的理解安排表的内容并插入数据。保存截图。</p>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191021-1571646745965" alt="图片描述"></p>
+<blockquote>
+<p>这个表过于简陋，book内还可以分为,book_name和book_id</p>
+</blockquote>
+<h2 id="sql-的约束"><a class="markdownIt-Anchor" href="#sql-的约束"></a> SQL 的约束</h2>
+<h3 id="下载测试数据库文件到桌面"><a class="markdownIt-Anchor" href="#下载测试数据库文件到桌面"></a> 下载测试数据库文件到桌面</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd Desktop</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/shiyanlou/SQL3.git</span><br></pre></td></tr></table></figure>
+<h3 id="加载数据库文件"><a class="markdownIt-Anchor" href="#加载数据库文件"></a> 加载数据库文件</h3>
+<p>先按照之前的步骤登陆数据库，之后输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /home/shiyanlou/Desktop/SQL3/MySQL-03-01.sql;</span><br></pre></td></tr></table></figure>
+<p>用<code>show tables;</code>命令查看一下数据库列表<br>
+<img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571843471962" alt="图片描述"></p>
+<h3 id="主键"><a class="markdownIt-Anchor" href="#主键"></a> 主键</h3>
+<p>主键 (PRIMARY KEY)是用于约束表中的一行，作为这一行的唯一标识符，在一张表中通过主键就能准确定位到一行。</p>
+<blockquote>
+<p>应用情景：假如我们要存储一个学生的信息，信息包含姓名，身高，性别，年龄。<br>
+不幸的是有两个女孩都叫小梦，且她们的身高和年龄相同，数据库将无法区分这两个实体，这时就需要用到主键了。</p>
+</blockquote>
+<h3 id="默认值约束"><a class="markdownIt-Anchor" href="#默认值约束"></a> 默认值约束</h3>
+<p>默认值约束 (DEFAULT) 规定，当有 DEFAULT 约束的列，插入数据为空时，将使用默认值。</p>
+<blockquote>
+<p>应用情景：默认值常用于一些可有可无的字段，比如用户的个性签名，如果用户没有设置，系统给他应该设定一个默认的文本，比如空文本或 ‘这个人太懒了，没有留下任何信息’。</p>
+</blockquote>
+<p>查看本测试文件的代码<br>
+<img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571844232914" alt="图片描述"><br>
+可以知道，department中people_num的默认值是10。因此分别输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO department(dpt_name,people_num) VALUES(&apos;dpt1&apos;,11);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO department(dpt_name) VALUES(&apos;dpt2&apos;);</span><br></pre></td></tr></table></figure>
+<p>查看结果为<br>
+<img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571844375411" alt="图片描述"></p>
+<p>dpt2虽然没有输入数值，但被默认赋值10。</p>
+<h3 id="唯一约束"><a class="markdownIt-Anchor" href="#唯一约束"></a> 唯一约束</h3>
+<p>唯一约束 (UNIQUE) 比较简单，它规定一张表中指定的一列的值必须不能有重复值，即这一列每个值都是唯一的。</p>
+<blockquote>
+<p>代码中对employee下的phone值进行了唯一约束限制。<br>
+<img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571844583758" alt="图片描述"><br>
+可以看到当尝试插入具有相同phone值的两段数据时，第二段数据报错</p>
+</blockquote>
+<h3 id="外键约束"><a class="markdownIt-Anchor" href="#外键约束"></a> 外键约束</h3>
+<p>外键 (FOREIGN KEY) 既能确保数据完整性，也能表现表之间的关系。</p>
+<blockquote>
+<p>应用情景：比如，现在有用户表和文章表，给文章表中添加一个指向用户 id 的外键，表示这篇文章所属的用户 id，外键将确保这个外键指向的记录是存在的，如果你尝试删除一个用户，而这个用户还有文章存在于数据库中，那么操作将无法完成并报错。因为你删除了该用户过后，他发布的文章都没有所属用户了，而这样的情况是不被允许的。同理，你在创建一篇文章的时候也不能为它指定一个不存在的用户 id。</p>
+</blockquote>
+<p>本代码中将employee的键值in_dpt设定为需要参考department中的键值dpt_name，因此若输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO employee VALUES(02,&apos;Jack&apos;,30,3500,114114,&apos;dpt3&apos;);</span><br></pre></td></tr></table></figure>
+<p>会由于department中没有对应的dpt3这个值，导致employee的该插入操作失败。<br>
+<img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571845121539" alt="图片描述"></p>
+<blockquote>
+<p>若再将dpt3改为dpt2，则可以操作成功</p>
+</blockquote>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571845212636" alt="图片描述"></p>
+<h3 id="非空约束"><a class="markdownIt-Anchor" href="#非空约束"></a> 非空约束</h3>
+<p>非空约束 (NOT NULL),听名字就能理解，被非空约束的列，在插入值时必须非空。</p>
+<blockquote>
+<p>尝试输入两组数据，其中第二组数据由于没有输入salary键值，而salary又在代码中有非空约束，导致第二组数据插入报错</p>
+</blockquote>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191023-1571845453219" alt="图片描述"></p>
+<h2 id="挑战搭建一个简易的成绩管理系统的数据库"><a class="markdownIt-Anchor" href="#挑战搭建一个简易的成绩管理系统的数据库"></a> 挑战：搭建一个简易的成绩管理系统的数据库</h2>
+<p>该篇过程略长，还是直接去网站上自己尝试吧，<a href="https://www.shiyanlou.com/courses/9" target="_blank" rel="noopener">挑战1链接</a></p>
+<p><strong>稍微补充一下自己遇到的问题：</strong></p>
+<h3 id="更改列名"><a class="markdownIt-Anchor" href="#更改列名"></a> 更改列名</h3>
+<p>不小心打错了student表中的sid，输入成了id，网上查了下，输入</p>
+<blockquote>
+<p>alter table 表名 change column 旧列名 新列名  新列名格式；</p>
+</blockquote>
+<p>也就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table student change column id sid  int；</span><br></pre></td></tr></table></figure>
+<p>就改好了</p>
+<h3 id="输入多组数值"><a class="markdownIt-Anchor" href="#输入多组数值"></a> 输入多组数值</h3>
+<p>根据先前学的还以为每次都要先申明输入变量名</p>
+<blockquote>
+<p>(变量1，变量2) values(val1,val2)</p>
+</blockquote>
+<p>结果发现可以直接 values(val1,val2) ，默认申明好了表里的几个变量。然后输入多组变量就直接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">values(val1,val2),values(val1,val2);</span><br></pre></td></tr></table></figure>
+<p>即可。</p>
+<h3 id="外键约束修改"><a class="markdownIt-Anchor" href="#外键约束修改"></a> 外键约束修改</h3>
+<p>偷懒着想跳过约束，结果检测失败了，没办法，只好查下怎么添加外键约束。<br>
+输入</p>
+<blockquote>
+<p>alter table 表名 add constraint 外键名 foreign key (变量名) references 某个表(变量名);</p>
+</blockquote>
+<p><a href="https://www.cnblogs.com/eyu1993/p/8902705.html" target="_blank" rel="noopener">参考文章</a></p>
+<h2 id="select语句详解"><a class="markdownIt-Anchor" href="#select语句详解"></a> select语句详解</h2>
+<h3 id="select语句查询特定列"><a class="markdownIt-Anchor" href="#select语句查询特定列"></a> select语句查询特定列</h3>
+<p>SELECT 语句的基本格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT 要查询的列名 FROM 表名字 WHERE 限制条件;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>之前的实验中，我们用<code>*</code>表示所有的列</p>
+</blockquote>
+<p>如果是查询特定的某列，比如要查看 employee 表的 name 和 age，就输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,age FROM employee;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572186871263" alt="图片描述"></p>
+<h3 id="select语句查询条件一数值范围查找"><a class="markdownIt-Anchor" href="#select语句查询条件一数值范围查找"></a> select语句查询条件(一)数值范围查找</h3>
+<p>在上面查看特定列对象的基础上，如果还要对数据进行条件筛选，就要在语句末尾添加<code>where</code> 语句，比如要再筛选出age大于25的数据，则输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,age FROM employee WHERE age&gt;25;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572187461325" alt="图片描述"></p>
+<p><code>where</code>后的条件语句使用的数学符号可以是<code>=,&lt;,&gt;,&gt;=,&lt;=</code></p>
+<p>还可以使用<code>or</code>以及<code>and</code>来实现多条件筛选，例如输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#筛选出 age 大于 25，且 age 小于 30</span><br><span class="line">SELECT name,age FROM employee WHERE age&gt;25 AND age&lt;30;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572187624786" alt="图片描述"></p>
+<blockquote>
+<p>若要包含25和30两个数字，则可以改为age BETWEEN 25 AND 30</p>
+</blockquote>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572187709072" alt="图片描述"></p>
+<h3 id="select查询条件二包含项查找"><a class="markdownIt-Anchor" href="#select查询条件二包含项查找"></a> select查询条件(二)包含项查找</h3>
+<p><code>in</code>和<code>not in</code>用来筛选在或者不在某个范围内，例如我们查询employee表中，在dpt3或者dpt4的人的name,age,phone,in_dpt，则输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,age,phone,in_dpt FROM employee WHERE in_dpt IN (&apos;dpt3&apos;,&apos;dpt4&apos;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572187991703" alt="图片描述"></p>
+<h3 id="select查询条件三模糊查找"><a class="markdownIt-Anchor" href="#select查询条件三模糊查找"></a> select查询条件(三)模糊查找</h3>
+<p>模糊查询可使用<code>like</code>来实现，和 LIKE 联用的通常还有通配符，代表未知字符。SQL中的通配符是 _ 和 % 。其中 <code>_</code> 代表一个未指定字符，<code>%</code> 代表不定个未指定字符</p>
+<p>比如若是只记得电话号码前四位数为1101，而后两位忘记了，则可以用两个 _ 通配符代替：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,age,phone FROM employee WHERE phone LIKE &apos;1101__&apos;;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572188245060" alt="图片描述"></p>
+<p>同样的，模糊搜索name开头为J的数据，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,age,phone FROM employee WHERE name LIKE &apos;J%&apos;;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572188369454" alt="图片描述"></p>
+<h3 id="select排序查询"><a class="markdownIt-Anchor" href="#select排序查询"></a> select排序查询</h3>
+<p>使用<code>order by</code>可让查询结果升序或者降序排序。默认情况下是升序。</p>
+<blockquote>
+<p>使用关键词 ASC 和 DESC 可指定升序或降序排序。</p>
+</blockquote>
+<p>例如，按salary降序排序，输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,age,salary,phone FROM employee ORDER BY salary DESC;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572188787708" alt="图片描述"></p>
+<h3 id="内置函数计算"><a class="markdownIt-Anchor" href="#内置函数计算"></a> 内置函数计算</h3>
+<table>
+<thead>
+<tr>
+<th>函数名：</th>
+<th>count</th>
+<th>sum</th>
+<th>avg</th>
+<th>max</th>
+<th>min</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作用:</td>
+<td>计数</td>
+<td>求和</td>
+<td>求平均值</td>
+<td>最大值</td>
+<td>最小值</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>其中 COUNT 函数可用于任何数据类型(因为它只是计数)，而 SUM 、AVG 函数都只能对数字类数据类型做计算，MAX 和 MIN 可用于数值、字符串或是日期时间数据类型。</p>
+</blockquote>
+<p>比如计算出 salary 的最大、最小值，输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MAX(salary) AS max_salary,MIN(salary) FROM employee;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572189281405" alt="图片描述"></p>
+<h3 id="子查询"><a class="markdownIt-Anchor" href="#子查询"></a> 子查询</h3>
+<p>对于涉及多个表的查询需要运用子查询功能。</p>
+<p>例如：想要知道名为 “Tom” 的员工所在部门做了几个工程。员工信息储存在 employee 表中，但工程信息储存在 project 表中。</p>
+<p>输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT of_dpt,COUNT(proj_name) AS count_project FROM project GROUP BY of_dpt</span><br><span class="line">HAVING of_dpt IN</span><br><span class="line">(SELECT in_dpt FROM employee WHERE name=&apos;Tom&apos;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面代码包含两个 SELECT 语句，第二个 SELECT 语句将返回一个集合的数据形式，然后被第一个 SELECT 语句用 in 进行判断。</p>
+</blockquote>
+<p>HAVING 关键字可以的作用和 WHERE 是一样的，都是说明接下来要进行条件筛选操作。</p>
+<p>区别在于 HAVING 用于对分组后的数据进行筛选</p>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572189447462" alt="图片描述"></p>
+<blockquote>
+<p>子查询还可以扩展到 3 层、4 层或更多层。</p>
+</blockquote>
+<h3 id="连接查询"><a class="markdownIt-Anchor" href="#连接查询"></a> 连接查询</h3>
+<p>子查询虽然可以处理多个表，但返回的只是一个表中的数据，若要同时返回多个表的数据，则必须使用<code>join</code>操作。</p>
+<p>例如，查询各员工所在部门的人数，其中员工的 id 和 name 来自 employee 表，people_num 来自 department 表，输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT id,name,people_num</span><br><span class="line">FROM employee,department</span><br><span class="line">WHERE employee.in_dpt = department.dpt_name</span><br><span class="line">ORDER BY id;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572189612143" alt="图片描述"></p>
+<blockquote>
+<p>也可以使用<code>join on</code> 语法，之前的语句可改为：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT id,name,people_num</span><br><span class="line">FROM employee JOIN department</span><br><span class="line">ON employee.in_dpt = department.dpt_name</span><br><span class="line">ORDER BY id;</span><br></pre></td></tr></table></figure>
+<p>结果不变。</p>
+<h3 id="课后习题-2"><a class="markdownIt-Anchor" href="#课后习题-2"></a> 课后习题</h3>
+<blockquote>
+<p>使用连接查询的方式，查询出各员工所在部门的人数与工程数，工程数命名为 count_project。（连接 3 个表，并使用 COUNT 内置函数）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; select name,people_num, count(proj_name) as count_project from </span><br><span class="line">&gt; employee,department,project </span><br><span class="line">&gt; where in_dpt = dpt_name and of_dpt = dpt_name</span><br><span class="line">&gt; group by name, people_num;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191027-1572191387699" alt="图片描述"></p>
+<blockquote>
+<p>一开始没加group by 语句，一直报错</p>
+</blockquote>
+<h2 id="数据库及表的修改和删除"><a class="markdownIt-Anchor" href="#数据库及表的修改和删除"></a> 数据库及表的修改和删除</h2>
+<h3 id="删除数据库"><a class="markdownIt-Anchor" href="#删除数据库"></a> 删除数据库</h3>
+<p>使用 <code>drop database 数据库名</code>删除数据库</p>
+<p>例如，输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE test_01;</span><br></pre></td></tr></table></figure>
+<p>删除数据库test_01</p>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191028-1572272169192" alt="图片描述"></p>
+<h3 id="修改数据库"><a class="markdownIt-Anchor" href="#修改数据库"></a> 修改数据库</h3>
+<p>由于修改数据库名会带来安全问题，因此现在的mysql版本已经去除了修改命令。</p>
+<blockquote>
+<p>若是需要更改数据库名，最好是新建一个数据库，然后把数据复制过去，同时最好保留旧数据库作为备份。</p>
+</blockquote>
+<h3 id="修改库中的表"><a class="markdownIt-Anchor" href="#修改库中的表"></a> 修改库中的表</h3>
+<h4 id="修改表名"><a class="markdownIt-Anchor" href="#修改表名"></a> 修改表名</h4>
+<p>有三种语句格式，效果一样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RENAME TABLE 原名 TO 新名字;</span><br><span class="line"></span><br><span class="line">ALTER TABLE 原名 RENAME 新名;</span><br><span class="line"></span><br><span class="line">ALTER TABLE 原名 RENAME TO 新名;</span><br></pre></td></tr></table></figure>
+<p>例如，输入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RENAME TABLE table_1 TO table_2;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191028-1572272502479" alt="图片描述"></p>
+<h4 id="删除表"><a class="markdownIt-Anchor" href="#删除表"></a> 删除表</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE 表名字;</span><br></pre></td></tr></table></figure>
+<p>例如，输入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE table_2;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191028-1572272591178" alt="图片描述"></p>
+<h3 id="修改表结构"><a class="markdownIt-Anchor" href="#修改表结构"></a> 修改表结构</h3>
+<p>若要在表中新增一列，使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名字 ADD COLUMN 列名字 数据类型 约束;</span><br><span class="line">或：</span><br><span class="line">ALTER TABLE 表名字 ADD 列名字 数据类型 约束;</span><br></pre></td></tr></table></figure>
+<p>例如，在employee表中加入一个height列，输入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE employee ADD height INT(4) DEFAULT 170;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>提醒：语句中的 INT(4) 不是表示整数的字节数，而是表示该值的显示宽度，如果设置填充字符为 0，则 170 显示为 0170</p>
+</blockquote>
+<p><img src="https://doc.shiyanlou.com/MySQL/sql-05-05.png/wm" alt></p>
+<blockquote>
+<p>加入的列默认是放在最右边的，如果想指定插入位置，就再加上 <code>after 某列</code></p>
+</blockquote>
+<p><img src="https://doc.shiyanlou.com/MySQL/sql-05-06.png/wm" alt></p>
+<blockquote>
+<p>如果想放在第一列就改为<code>first</code></p>
+</blockquote>
+<p><img src="https://doc.shiyanlou.com/MySQL/sql-05-07.png/wm" alt></p>
+<p>删除一列使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名字 DROP COLUMN 列名字;</span><br><span class="line"></span><br><span class="line">或： ALTER TABLE 表名字 DROP 列名字;</span><br></pre></td></tr></table></figure>
+<p>重命名一列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名字 CHANGE 原列名 新列名 数据类型 约束;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：这条重命名语句后面的 “数据类型” 不能省略，否则重命名失败。</p>
+</blockquote>
+<p>更改数据类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名字 MODIFY 列名字 新数据类型;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>修改数据类型必须小心，因为这可能会导致数据丢失。在尝试修改数据类型之前，请慎重考虑。</p>
+</blockquote>
+<h3 id="表内容修改"><a class="markdownIt-Anchor" href="#表内容修改"></a> 表内容修改</h3>
+<p>修改某个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE 表名字 SET 列1=值1,列2=值2 WHERE 条件;</span><br></pre></td></tr></table></figure>
+<p><img src="https://doc.shiyanlou.com/MySQL/sql-05-10.png/wm" alt></p>
+<blockquote>
+<p>一定要有<code>where</code>条件约束，否则会把整个表全都改了</p>
+</blockquote>
+<p>删除一行记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM 表名字 WHERE 条件;</span><br></pre></td></tr></table></figure>
+<p><img src="https://doc.shiyanlou.com/MySQL/sql-05-11.png/wm" alt></p>
+<blockquote>
+<p>删除操作也必须有<code>where</code>条件约束，否则会删除所有内容</p>
+</blockquote>
+<h2 id="其它基本操作"><a class="markdownIt-Anchor" href="#其它基本操作"></a> 其它基本操作</h2>
+<h3 id="索引"><a class="markdownIt-Anchor" href="#索引"></a> 索引</h3>
+<p>索引是一种与表有关的结构，它的作用相当于书的目录，可以根据目录中的页码快速找到所需的内容。</p>
+<p>对一张表中的某个列建立索引，有以下两种语句格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名字 ADD INDEX 索引名 (列名);</span><br><span class="line"></span><br><span class="line">CREATE INDEX 索引名 ON 表名字 (列名);</span><br></pre></td></tr></table></figure>
+<p>例如输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE employee ADD INDEX idx_id (id);  #在employee表的id列上建立名为idx_id的索引</span><br><span class="line"></span><br><span class="line">CREATE INDEX idx_name ON employee (name);   #在employee表的name列上建立名为idx_name的索引</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572616720326" alt="图片描述"></p>
+<p>再输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show index from employee;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572618288640" alt="图片描述"></p>
+<p>可以看到刚才新建的索引</p>
+<h3 id="视图"><a class="markdownIt-Anchor" href="#视图"></a> 视图</h3>
+<p>视图是从一个或多个表中导出来的表，是一种虚拟存在的表。用户可以不用看到整个数据库中的数据，而只关心对自己有用的数据。</p>
+<p>创建视图的语句格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW 视图名(列a,列b,列c) AS SELECT 列1,列2,列3 FROM 表名字;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可见创建视图的语句，后半句是一个 SELECT 查询语句，所以视图也可以建立在多张表上，只需在 SELECT 语句中使用子查询或连接查询，这些在之前的实验已经进行过。</p>
+</blockquote>
+<p>现在创建一个简单的视图，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW v_emp (v_name,v_age,v_phone) AS SELECT name,age,phone FROM employee;</span><br></pre></td></tr></table></figure>
+<p>查看，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from v_emp;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572618902708" alt="图片描述"></p>
+<h3 id="导入"><a class="markdownIt-Anchor" href="#导入"></a> 导入</h3>
+<p>导入有两种形式：</p>
+<ul>
+<li>数据导入：数据存储在类似xx.txt的文档中，导入规则由数据库完成。</li>
+<li>SQL文件导入：相当于执行该文件中包含的 SQL 语句，可以实现多种操作，包括删除，更新，新增，甚至对数据库的重建。</li>
+</ul>
+<p>由于导入导出大量数据都属于敏感操作，根据 mysql 的安全策略，导入导出的文件都必须在指定的路径下进行，在 mysql 终端中查看路径变量，输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;%secure%&apos;;</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572619653336" alt="图片描述"></p>
+<blockquote>
+<p>注意到 secure_file_priv 变量指定安全路径为 /var/lib/mysql-files/ ，要导入数据文件，需要将该文件移动到安全路径下。</p>
+</blockquote>
+<p>这里，我们将测试文件复制过去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp -a /home/shiyanlou/Desktop/SQL6 /var/lib/mysql-files/ #复制</span><br><span class="line">sudo vim /var/lib/mysql-files/SQL6/in.txt #查看内容</span><br></pre></td></tr></table></figure>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572620139432" alt="图片描述"></p>
+<p>数据文件导入语句格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LOAD DATA INFILE &apos;文件路径和文件名&apos; INTO TABLE 表名字;</span><br></pre></td></tr></table></figure>
+<p>于是，输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data infile &apos;/var/lib/mysql-files/SQL6/in.txt&apos; into table employee;</span><br></pre></td></tr></table></figure>
+<p>用<code>select *from employee;</code>查看一下</p>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572621222674" alt="图片描述"></p>
+<h3 id="导出"><a class="markdownIt-Anchor" href="#导出"></a> 导出</h3>
+<p>导出语句基本格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列1，列2 INTO OUTFILE &apos;文件路径和文件名&apos; FROM 表名字;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：语句中 “文件路径” 之下不能已经有同名文件。</p>
+</blockquote>
+<p>将测试数据导出，输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * INTO OUTFILE &apos;/var/lib/mysql-files/out.txt&apos; FROM employee;</span><br></pre></td></tr></table></figure>
+<p>可输入<code>sudo gedit /var/lib/mysql-files/out.txt</code>查看内容</p>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572621476756" alt="图片描述"></p>
+<h3 id="备份"><a class="markdownIt-Anchor" href="#备份"></a> 备份</h3>
+<p>备份与导出的区别：导出的文件只是保存数据库中的数据；而备份，则是把数据库的结构，包括数据、约束、索引、视图等全部另存为一个文件。</p>
+<p>我们将使用mysqldump来完成备份。</p>
+<blockquote>
+<p>mysqldump 是 MySQL 用于备份数据库的实用程序。它主要产生一个 SQL 脚本文件，其中包含从头重新创建数据库所必需的命令 CREATE TABLE INSERT 等。</p>
+</blockquote>
+<p>使用 mysqldump 备份的语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root 数据库名&gt;备份文件名;   #备份整个数据库</span><br><span class="line"></span><br><span class="line">mysqldump -u root 数据库名 表名字&gt;备份文件名;  #备份整个表</span><br></pre></td></tr></table></figure>
+<p>先退出mysql控制台，在终端输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/shiyanlou/</span><br><span class="line">mysqldump -u root mysql_shiyan &gt; bak.sql;</span><br></pre></td></tr></table></figure>
+<p>输入<code>sudo gedit /home/shiyanlou/bak.sql</code>来查看内容</p>
+<p><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572621805749" alt="图片描述"></p>
+<h3 id="恢复"><a class="markdownIt-Anchor" href="#恢复"></a> 恢复</h3>
+<p>使用备份文件可以恢复数据库，或者用作导入。恢复数据库有两种方式：</p>
+<ul>
+<li>第一种是之前经常使用的，类似<code>source /tmp/SQL6/MySQL-06.sql</code>这样的语句</li>
+<li>第二种方式：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root          #因为在上一步已经退出了MySQL，现在需要重新登录</span><br><span class="line"></span><br><span class="line">CREATE DATABASE test;  #新建一个名为test的数据库</span><br></pre></td></tr></table></figure>
+<p>再次 Ctrl+D 退出 MySQL，然后输入语句进行恢复，把刚才备份的 bak.sql 恢复到 test 数据库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root test &lt; bak.sql</span><br></pre></td></tr></table></figure>
+<p>查看一下test数据库的表<br>
+<img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572622190476" alt="图片描述"><br>
+已经把数据从备份文件中导入到test里了</p>
+<h3 id="课后习题-3"><a class="markdownIt-Anchor" href="#课后习题-3"></a> 课后习题</h3>
+<blockquote>
+<p>建立员工名字 <a href="http://employee.name" target="_blank" rel="noopener">employee.name</a> 和对应部门人数 department.people_num 的视图并展示。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create view v_emp2 (employee_name,dptartment_people_num) as select name,people_num from employee,department WHERE in_dpt = dpt_name;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>自己写出来时发现没加where限制，上面是已经补上了的</p>
+</blockquote>
+<p>更正之后的结果：<br>
+<img src="https://dn-simplecloud.shiyanlou.com/courses/uid1134095-20191101-1572622827849" alt="图片描述"></p>
+<p><strong>到此，门估计都还没入…</strong></p>
+<p>(完)</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/10/24/MySQL基础入门/">MySQL基础入门</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">塔牌</a></p>
+        <p><span>发布时间:</span>2019-10-24, 19:46:30</p>
+        <p><span>最后更新:</span>2019-11-01, 23:59:16</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/10/24/MySQL基础入门/" title="MySQL基础入门">http://tappat.top/2019/10/24/MySQL基础入门/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://tappat.top/2019/10/24/MySQL基础入门/　　作者: 塔牌" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/11/04/网络空间安全导论笔记/">
+                    网络空间安全导论笔记
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/10/23/ucosⅡ移植mini2440及其应用/">
+                    ucosⅡ移植mini2440及其应用
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sql-介绍及-mysql-安装"><span class="toc-text"> SQL 介绍及 MySQL 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#连接并进入数据库"><span class="toc-text"> 连接并进入数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看数据库信息"><span class="toc-text"> 查看数据库信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建数据库并插入数据"><span class="toc-text"> 创建数据库并插入数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进入数据库"><span class="toc-text"> 进入数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建数据库"><span class="toc-text"> 创建数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切换到新创建的数据库下"><span class="toc-text"> 切换到新创建的数据库下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建新的表"><span class="toc-text"> 创建新的表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入数据"><span class="toc-text"> 插入数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看表中信息"><span class="toc-text"> 查看表中信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#课后习题"><span class="toc-text"> 课后习题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sql-的约束"><span class="toc-text"> SQL 的约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载测试数据库文件到桌面"><span class="toc-text"> 下载测试数据库文件到桌面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加载数据库文件"><span class="toc-text"> 加载数据库文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主键"><span class="toc-text"> 主键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#默认值约束"><span class="toc-text"> 默认值约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#唯一约束"><span class="toc-text"> 唯一约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外键约束"><span class="toc-text"> 外键约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非空约束"><span class="toc-text"> 非空约束</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#挑战搭建一个简易的成绩管理系统的数据库"><span class="toc-text"> 挑战：搭建一个简易的成绩管理系统的数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#更改列名"><span class="toc-text"> 更改列名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入多组数值"><span class="toc-text"> 输入多组数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外键约束修改"><span class="toc-text"> 外键约束修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#select语句详解"><span class="toc-text"> select语句详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#select语句查询特定列"><span class="toc-text"> select语句查询特定列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#select语句查询条件一数值范围查找"><span class="toc-text"> select语句查询条件(一)数值范围查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#select查询条件二包含项查找"><span class="toc-text"> select查询条件(二)包含项查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#select查询条件三模糊查找"><span class="toc-text"> select查询条件(三)模糊查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#select排序查询"><span class="toc-text"> select排序查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内置函数计算"><span class="toc-text"> 内置函数计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子查询"><span class="toc-text"> 子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接查询"><span class="toc-text"> 连接查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#课后习题-2"><span class="toc-text"> 课后习题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库及表的修改和删除"><span class="toc-text"> 数据库及表的修改和删除</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#删除数据库"><span class="toc-text"> 删除数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改数据库"><span class="toc-text"> 修改数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改库中的表"><span class="toc-text"> 修改库中的表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#修改表名"><span class="toc-text"> 修改表名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除表"><span class="toc-text"> 删除表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改表结构"><span class="toc-text"> 修改表结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表内容修改"><span class="toc-text"> 表内容修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其它基本操作"><span class="toc-text"> 其它基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#索引"><span class="toc-text"> 索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#视图"><span class="toc-text"> 视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导入"><span class="toc-text"> 导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导出"><span class="toc-text"> 导出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#备份"><span class="toc-text"> 备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#恢复"><span class="toc-text"> 恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#课后习题-3"><span class="toc-text"> 课后习题</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"MySQL基础入门　| TappaT's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <section class="livere" id="comments">
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80Njk4My8yMzQ4Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/11/04/网络空间安全导论笔记/" title="上一篇: 网络空间安全导论笔记">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/10/23/ucosⅡ移植mini2440及其应用/" title="下一篇: ucosⅡ移植mini2440及其应用">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/25/本科数据结构算法题整理/">本科数据结构算法题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Speech/">Churchill broadcast speech</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Address/">Gettysburg Address</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/网络空间安全导论笔记/">网络空间安全导论笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/MySQL基础入门/">MySQL基础入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/23/ucosⅡ移植mini2440及其应用/">ucosⅡ移植mini2440及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/">C++中结构体与类的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/一些有价值的网页/">一些有价值的网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/09/FPGA产生m序列及其应用/">FPGA产生m序列及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/07/辨析arcsinsinx与arccoscosx/">辨析arcsin(sinx)与arccos(cosx)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/06/博苏克-乌拉姆定理解项链珠宝分配问题/">博苏克-乌拉姆定理解项链珠宝分配问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/05/构造函数典例及其保号性思路/">构造函数典例及其保号性思路</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/调和级数判敛/">调和级数判敛</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/C-动态内存简介/">C++动态内存简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/P站画师collection/">P站画师collection</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/FPGA二进制序列检测/">FPGA二进制序列检测</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/01/欢迎页面/">欢迎页面</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/网站更新记录/">网站更新记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/28/关于书写用笔的使用记录/">关于书写用笔的使用记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/27/DFT圆周卷积典例/">DFT圆周卷积典例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/PAT甲级1008部分正确情况分析/">PAT甲级1008部分正确情况分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/FPGA产生三路120度相位差正弦波/">FPGA产生三路120度相位差正弦波</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/FPGA实现CORDIC算法/">FPGA实现CORDIC算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/FPGA测量两路信号的相位差/">FPGA测量两路同频信号的相位差</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/人间永恒/">人间永恒</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2019 塔牌
+            </div>
+ 
+ 
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+ 
+ 
+        
+ 
+ 
+            <div class="visit">
+                
+                    <span style='display:inline'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i>本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                        </span>
+                    </span>
+                
+ 
+ 
+                
+                    <span>| </span>
+                
+ 
+ 
+                
+                    <span style='display:inline'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i>本页面被访问<span id="busuanzi_value_page_pv"></span>次
+                        </span>
+                    </span>
+                
+ 
+                
+                    <span>| </span>
+                
+ 
+ 
+                
+                    <span style='display:inline'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-user" aria-hidden="true"></i>本站访客数<span id="busuanzi_value_site_uv"></span>人
+                        </span>
+                    </span>
+                
+ 
+                
+            </div>
+        
+    </div>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("09/14/2019 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 8;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>
