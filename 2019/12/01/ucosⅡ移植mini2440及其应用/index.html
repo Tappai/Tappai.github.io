@@ -19,7 +19,7 @@
 <meta name="keywords" content="原创,嵌入式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ucosⅡ移植mini2440及其应用">
-<meta property="og:url" content="http://tappat.top/2019/10/23/ucosⅡ移植mini2440及其应用/index.html">
+<meta property="og:url" content="http://tappat.top/2019/12/01/ucosⅡ移植mini2440及其应用/index.html">
 <meta property="og:site_name" content="TappaT&#39;s Blog">
 <meta property="og:description" content="嵌入式实践的一些记录">
 <meta property="og:locale" content="zh-Hans">
@@ -31,7 +31,8 @@
 <meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/2440_3.jpg">
 <meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2440_desktop.jpg">
 <meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/2440_led.jpg">
-<meta property="og:updated_time" content="2019-11-21T08:29:24.395Z">
+<meta property="og:image" content="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/mini2440_key.png">
+<meta property="og:updated_time" content="2019-12-01T15:07:03.833Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ucosⅡ移植mini2440及其应用">
 <meta name="twitter:description" content="嵌入式实践的一些记录">
@@ -270,8 +271,8 @@
       <div class="body-wrap"><article id="post-ucosⅡ移植mini2440及其应用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/10/23/ucosⅡ移植mini2440及其应用/" class="article-date">
-      <time datetime="2019-10-23T09:58:15.000Z" itemprop="datePublished">2019-10-23</time>
+      <a href="/2019/12/01/ucosⅡ移植mini2440及其应用/" class="article-date">
+      <time datetime="2019-12-01T15:07:00.000Z" itemprop="datePublished">2019-12-01</time>
 </a>
 
 
@@ -300,7 +301,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.5k字</span>
+        <span class="post-count">1.8k字</span>
       </span>
     </span>
 
@@ -309,7 +310,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
+        <span class="post-count">7分</span>
       </span>
     </span>
 </div>
@@ -462,6 +463,33 @@
 <p>其中对<code>UartMsgBufLengh</code>的定义为</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> UartMsgBufLengh 100</span></span><br></pre></td></tr></table></figure>
 <p>即内存块大小为4*100=400字节，若要修改内存块大小，修改该值即可。</p>
+<h2 id="4-按键控制"><a class="markdownIt-Anchor" href="#4-按键控制"></a> 4 按键控制</h2>
+<h3 id="41-资料分析"><a class="markdownIt-Anchor" href="#41-资料分析"></a> 4.1 资料分析</h3>
+<p>在用户手册中，我们可以找到如下说明：</p>
+<p><img src="https://tappat-1300227703.cos.ap-guangzhou.myqcloud.com/picture/ucos/mini2440_key.png" alt></p>
+<p>打开<code>\uCos2\S3C2440\includes\2440addr.h</code>，里面有如下定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rGPGCON    (*(volatile unsigned *)0x56000060)	<span class="comment">//Port G control</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rGPGDAT    (*(volatile unsigned *)0x56000064)	<span class="comment">//Port G data</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rGPGUP     (*(volatile unsigned *)0x56000068)	<span class="comment">//Pull-up control G</span></span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="42-函数构造"><a class="markdownIt-Anchor" href="#42-函数构造"></a> 4.2 函数构造</h3>
+<p>于是根据以上信息，我们可以设计出一个用于检测按键反馈的函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">U8 <span class="title">Key_Scan</span><span class="params">( <span class="keyword">void</span> )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Delay( <span class="number">80</span> ) ;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(      (rGPGDAT&amp;(<span class="number">1</span>&lt;&lt; <span class="number">0</span>)) == <span class="number">0</span> )	</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span> ;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>( (rGPGDAT&amp;(<span class="number">1</span>&lt;&lt; <span class="number">3</span>)) == <span class="number">0</span> )</span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>( (rGPGDAT&amp;(<span class="number">1</span>&lt;&lt; <span class="number">5</span>)) == <span class="number">0</span> )</span><br><span class="line">		<span class="keyword">return</span> <span class="number">3</span> ;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>( (rGPGDAT&amp;(<span class="number">1</span>&lt;&lt; <span class="number">6</span>)) == <span class="number">0</span> )</span><br><span class="line">		<span class="keyword">return</span> <span class="number">4</span> ;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>( (rGPGDAT&amp;(<span class="number">1</span>&lt;&lt; <span class="number">7</span>)) == <span class="number">0</span> )</span><br><span class="line">		<span class="keyword">return</span> <span class="number">5</span> ;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>( (rGPGDAT&amp;(<span class="number">1</span>&lt;&lt;<span class="number">11</span>)) == <span class="number">0</span> )</span><br><span class="line">		<span class="keyword">return</span> <span class="number">6</span> ;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0xff</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1X6 矩阵键盘<br>
+六个输入引脚：</p>
+<pre><code>  		EINT8 -----( GPG0  )
+  		EINT11 -----( GPG3  )
+  		EINT13-----( GPG5  )
+  		EINT14-----( GPG6 )
+  		EINT15-----( GPG7 )
+  		EINT19-----( GPG11 )
+</code></pre>
+</blockquote>
+<hr>
+<h3 id="43-应用"><a class="markdownIt-Anchor" href="#43-应用"></a> 4.3 应用</h3>
+<p>回到main文件，将我们构造的函数添加进去，接着回到之前的小灯任务（Task1），其中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(TestCnt%<span class="number">2</span>)</span><br><span class="line">    	rGPBDAT = <span class="number">0x0000</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">   	rGPBDAT = <span class="number">0x07fe</span>;</span><br><span class="line">   	</span><br><span class="line">    OSTimeDly(OS_TICKS_PER_SEC);</span><br></pre></td></tr></table></figure>
+<p>把这段代码if语句的条件改为key_scan为参数（可以是检测任意按键或某个特定按键）。</p>
+<p>实际运行时，检测到按键按下，小灯发生变化。</p>
 
       
     </div>
@@ -470,13 +498,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/10/23/ucosⅡ移植mini2440及其应用/">ucosⅡ移植mini2440及其应用</a></p>
+        <p><span>本文标题:</span><a href="/2019/12/01/ucosⅡ移植mini2440及其应用/">ucosⅡ移植mini2440及其应用</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">塔牌</a></p>
-        <p><span>发布时间:</span>2019-10-23, 17:58:15</p>
-        <p><span>最后更新:</span>2019-11-21, 16:29:24</p>
+        <p><span>发布时间:</span>2019-12-01, 23:07:00</p>
+        <p><span>最后更新:</span>2019-12-01, 23:07:03</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/10/23/ucosⅡ移植mini2440及其应用/" title="ucosⅡ移植mini2440及其应用">http://tappat.top/2019/10/23/ucosⅡ移植mini2440及其应用/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://tappat.top/2019/10/23/ucosⅡ移植mini2440及其应用/　　作者: 塔牌" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/12/01/ucosⅡ移植mini2440及其应用/" title="ucosⅡ移植mini2440及其应用">http://tappat.top/2019/12/01/ucosⅡ移植mini2440及其应用/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://tappat.top/2019/12/01/ucosⅡ移植mini2440及其应用/　　作者: 塔牌" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -488,16 +516,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/10/24/MySQL基础入门/">
-                    MySQL基础入门
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/">
-                    C++中结构体与类的区别
+                <a href="/2019/11/30/关于书写用笔的使用记录/">
+                    关于书写用笔的使用记录
                 </a>
             </div>
         
@@ -509,7 +531,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-准备阶段"><span class="toc-text"> 1 准备阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-先了解一下mini2440的接口布局"><span class="toc-text"> 1.1 先了解一下mini2440的接口布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-步骤说明"><span class="toc-text"> 1.2 步骤说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-安装驱动"><span class="toc-text"> 1.3 安装驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-检测驱动"><span class="toc-text"> 1.4 检测驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-设置超级终端"><span class="toc-text"> 1.5 设置超级终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-dnw设置"><span class="toc-text"> 1.6 DNW设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-下载测试"><span class="toc-text"> 1.7 下载测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ucos移植准备"><span class="toc-text"> 2 UCOS移植准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-工程文件"><span class="toc-text"> 2.1 工程文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-编译"><span class="toc-text"> 2.2 编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-调整"><span class="toc-text"> 2.3 调整</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-小灯测试"><span class="toc-text"> 2.4 小灯测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-时间显示"><span class="toc-text"> 2.5 时间显示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-内存管理"><span class="toc-text"> 3 内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#31-代码分析"><span class="toc-text"> 3.1 代码分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-修改内存块大小"><span class="toc-text"> 3.2 修改内存块大小</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-准备阶段"><span class="toc-text"> 1 准备阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-先了解一下mini2440的接口布局"><span class="toc-text"> 1.1 先了解一下mini2440的接口布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-步骤说明"><span class="toc-text"> 1.2 步骤说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-安装驱动"><span class="toc-text"> 1.3 安装驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-检测驱动"><span class="toc-text"> 1.4 检测驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-设置超级终端"><span class="toc-text"> 1.5 设置超级终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-dnw设置"><span class="toc-text"> 1.6 DNW设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-下载测试"><span class="toc-text"> 1.7 下载测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ucos移植准备"><span class="toc-text"> 2 UCOS移植准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-工程文件"><span class="toc-text"> 2.1 工程文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-编译"><span class="toc-text"> 2.2 编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-调整"><span class="toc-text"> 2.3 调整</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-小灯测试"><span class="toc-text"> 2.4 小灯测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-时间显示"><span class="toc-text"> 2.5 时间显示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-内存管理"><span class="toc-text"> 3 内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#31-代码分析"><span class="toc-text"> 3.1 代码分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-修改内存块大小"><span class="toc-text"> 3.2 修改内存块大小</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-按键控制"><span class="toc-text"> 4 按键控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#41-资料分析"><span class="toc-text"> 4.1 资料分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#42-函数构造"><span class="toc-text"> 4.2 函数构造</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#43-应用"><span class="toc-text"> 4.3 应用</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -586,21 +608,19 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/10/24/MySQL基础入门/" title="上一篇: MySQL基础入门">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/" title="下一篇: C++中结构体与类的区别">
+            <a href="/2019/11/30/关于书写用笔的使用记录/" title="下一篇: 关于书写用笔的使用记录">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/关于书写用笔的使用记录/">关于书写用笔的使用记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/25/本科数据结构算法题整理/">本科数据结构算法题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Speech/">Churchill broadcast speech</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Address/">Gettysburg Address</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/网络空间安全导论笔记/">网络空间安全导论笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/MySQL基础入门/">MySQL基础入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/23/ucosⅡ移植mini2440及其应用/">ucosⅡ移植mini2440及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/">C++中结构体与类的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/一些有价值的网页/">一些有价值的网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/09/FPGA产生m序列及其应用/">FPGA产生m序列及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/07/辨析arcsinsinx与arccoscosx/">辨析arcsin(sinx)与arccos(cosx)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/06/博苏克-乌拉姆定理解项链珠宝分配问题/">博苏克-乌拉姆定理解项链珠宝分配问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/05/构造函数典例及其保号性思路/">构造函数典例及其保号性思路</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/调和级数判敛/">调和级数判敛</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/C-动态内存简介/">C++动态内存简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/P站画师collection/">P站画师collection</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/FPGA二进制序列检测/">FPGA二进制序列检测</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/01/欢迎页面/">欢迎页面</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/网站更新记录/">网站更新记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/27/DFT圆周卷积典例/">DFT圆周卷积典例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/PAT甲级1008部分正确情况分析/">PAT甲级1008部分正确情况分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/FPGA产生三路120度相位差正弦波/">FPGA产生三路120度相位差正弦波</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/FPGA实现CORDIC算法/">FPGA实现CORDIC算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/FPGA测量两路信号的相位差/">FPGA测量两路同频信号的相位差</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/人间永恒/">人间永恒</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/ucosⅡ移植mini2440及其应用/">ucosⅡ移植mini2440及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/关于书写用笔的使用记录/">关于书写用笔的使用记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/25/本科数据结构算法题整理/">本科数据结构算法题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Speech/">Churchill broadcast speech</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/Address/">Gettysburg Address</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/网络空间安全导论笔记/">网络空间安全导论笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/MySQL基础入门/">MySQL基础入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/13/C-中结构体与类的区别（struct与class的区别）/">C++中结构体与类的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/一些有价值的网页/">一些有价值的网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/09/FPGA产生m序列及其应用/">FPGA产生m序列及其应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/07/辨析arcsinsinx与arccoscosx/">辨析arcsin(sinx)与arccos(cosx)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/06/博苏克-乌拉姆定理解项链珠宝分配问题/">博苏克-乌拉姆定理解项链珠宝分配问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/05/构造函数典例及其保号性思路/">构造函数典例及其保号性思路</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/03/调和级数判敛/">调和级数判敛</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/C-动态内存简介/">C++动态内存简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/P站画师collection/">P站画师collection</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/02/FPGA二进制序列检测/">FPGA二进制序列检测</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/01/欢迎页面/">欢迎页面</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/网站更新记录/">网站更新记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/27/DFT圆周卷积典例/">DFT圆周卷积典例</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/PAT甲级1008部分正确情况分析/">PAT甲级1008部分正确情况分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/FPGA产生三路120度相位差正弦波/">FPGA产生三路120度相位差正弦波</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/FPGA实现CORDIC算法/">FPGA实现CORDIC算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/FPGA测量两路信号的相位差/">FPGA测量两路同频信号的相位差</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/15/人间永恒/">人间永恒</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/14/hello-world/">Hello World</a></li></ul>
 
 
 
